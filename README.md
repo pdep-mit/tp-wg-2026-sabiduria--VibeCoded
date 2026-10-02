@@ -1,13 +1,12 @@
-# Wollok Game: Título de juego
+# Wollok Game: HowToTrash
 
-**Grupo:** Nombre de Grupo
+**Grupo:** VibeCoded
 
 **Integrantes:**
-- Nombre y Apellido
-- Nombre y Apellido
-- Nombre y Apellido
-- Nombre y Apellido
-- Nombre y Apellido
+- Nicolás Monteiro Del Castillo
+- Damián Ezequiel Sánchez
+- Tomás Agustín Jamardo
+- Ignacio Gabriel Juárez Torres
 
 ## Consignas
 

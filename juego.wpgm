@@ -1,13 +1,15 @@
 import wollok.game.*
-import example.*
+import personajes.*
 
-program NombreDeJuego {
+program HowToTrash {
 	// TODO: Cambiar esto por lo que necesiten
-	game.title("Grupo: ... | Nombre de jueguito")
-	game.height(10)
-	game.width(10)
+	game.title("Grupo: Vibecoded | How To Trash")
+	game.height(30)
+	game.width(50)
+	game.cellSize(20)
 
-	game.addVisual(player)
-
+	//game.addVisual(player)
+	game.addVisual(jugador)
+	jugador.movimiento()
 	game.start()
 }
