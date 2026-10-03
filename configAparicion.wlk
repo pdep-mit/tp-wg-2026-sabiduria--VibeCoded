@@ -24,3 +24,19 @@ object generador{
 	}
 
 }
+
+object planificador{ //Con este me fijo que los objetos cumplan los tiempos de desaparicion y regeneracion
+	method aparecer(objeto) {
+		generador.crear(objeto)
+		game.schedule(objeto.tiempoDesaparicion(), {self.desaparecer(objeto)})
+	}
+
+	method desaparecer(objeto) {
+		if (game.hasVisual(objeto)) game.removeVisual(objeto) //Si ya lo habia recogido el jugador no se elimina (por si rompe)
+		game.schedule(objeto.tiempoRegeneracion(), {self.aparecer(objeto)}) 
+	}
+}
+
+/*
+FALTA: que de algun lado se llame al planificador para poder comenzar el ciclo
+*/
