@@ -1,4 +1,5 @@
 import movimientos.*
+import basura.*
 class Personaje {
 	var property position 
 	var property image
@@ -18,14 +19,18 @@ object jugador inherits Personaje (position= game.center(), image= "player.png")
   	}
 
    method recolectarItem(item){
-        self.inventario( self.inventario() + 1)
+        self.inventario(self.inventario() + 1)
         self.items_recolectados().add(item)
+		item.esRecolectadoPor(self)
 
     }
 
     method valorItemsRecolectados(){
         return self.items_recolectados().map({item => item.valor()}).sum()
     }
+	method ganarDinero(cantidad) {
+		dinero+= cantidad
+	}
 }
 
 //const jugador = new Personaje(position = game.at(10,0), image= "player.png") 

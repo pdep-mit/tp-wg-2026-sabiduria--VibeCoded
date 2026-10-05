@@ -1,5 +1,6 @@
 import wollok.game.*
 import personajes.*
+import basura.*
 
 program HowToTrash {
 	// TODO: Cambiar esto por lo que necesiten
@@ -10,7 +11,12 @@ program HowToTrash {
 
 	//Agregar Visuales
 	game.addVisual(jugador)
+	botella.spawn()
+	caja.spawn()
+	papel.spawn()
 
+	//Mecánicas
+	game.whenCollideDo(jugador, {item => jugador.recolectarItem(item)})
 	jugador.movimiento()
 	game.start()
 }

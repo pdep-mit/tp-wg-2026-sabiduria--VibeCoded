@@ -36,3 +36,4 @@ object mayorValor{
 // ideas posibles de mejoras:
 // escudo -> proteger de basura que puede daniar
 // iman -> aumenta el radio de recoleccion ( 3 niveles: 1ro agrega un espacio en der e izq, 2do agrega arriba y abajo, 3ro aumenta de todos los lados y en diagonal )
+//+velocidad
