@@ -6,7 +6,7 @@ program HowToTrash {
 	// TODO: Cambiar esto por lo que necesiten
 	game.title("Grupo: Vibecoded | How To Trash")
 	game.height(30)
-	game.width(50)
+	game.width(30)
 	game.cellSize(20)
 
 	//Agregar Visuales
