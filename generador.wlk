@@ -10,6 +10,7 @@ object generador{
 	method crear(objeto){ //Hace aparecer el objeto en el mapa
 		self.ubicar(objeto)
 		game.addVisual(objeto)
+		planificador.desaparecer(objeto)
 	}
 
 	method ubicar(objeto){ //Le asigna la celda al objeto
@@ -24,9 +25,20 @@ object generador{
 	    if (game.getObjectsIn(celdaRandom).isEmpty()) objeto.position(celdaRandom)
 	    else self.ubicar(objeto)
 	}
+	
+}
 
+object planificador {
 	method spawnTimer(objeto){
-		//game.tick(azar.numeroEntre(10000,15000), objeto.spawn(), false)
-		game.schedule(azar.numeroEntre(8000,12000), {objeto.spawn()})
+		game.schedule(azar.numeroEntre(5000,12000), {objeto.spawn()})
+	}
+
+	method desaparecer(objeto){
+		game.schedule(objeto.tiempoDesaparicion(), {
+			if (game.hasVisual(objeto)) { //Si la basura está en el mapa
+				game.removeVisual(objeto) 
+				self.spawnTimer(objeto)
+			}
+		})
 	}
 }

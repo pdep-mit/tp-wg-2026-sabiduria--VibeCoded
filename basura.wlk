@@ -4,6 +4,7 @@ import personajes.*
 
 class Basura{
 	var property position = game.at(0, 0)
+	const property tiempoDesaparicion = 7000 // en ms
 	method image()
 	method valor()
 	method espacio()
@@ -12,9 +13,11 @@ class Basura{
 		generador.crear(self)
 	}
 	method esRecolectadoPor(jugador){
-		jugador.ganarDinero(self.valor())
-		game.removeVisual(self)
-		generador.spawnTimer(self)
+		if(game.hasVisual(self)) {
+			jugador.ganarDinero(self.valor())
+			game.removeVisual(self)
+			planificador.spawnTimer(self)
+		}
 	}
 }
 

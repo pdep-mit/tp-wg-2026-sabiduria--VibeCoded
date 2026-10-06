@@ -4,10 +4,22 @@ import personajes.*
 import negocioMejoras.*
 import basura.*
 
-describe "groupo de tests" {
+describe "grupo de tests" {
 
-  test "Payer comeinza en el centro del tabler" {
+  test "Player comeinza en el centro del tabler" {
     assert.equals(game.center(), jugador.position())
+  }
+
+  test "Player agarra una basura al colisionarla" {
+    const invInicial = jugador.items_recolectados().size()
+    jugador.recolectarItem(botella)
+    assert.equals(invInicial+1, jugador.items_recolectados().size())
+  }
+
+  test "Player se queda sin espacio cuando llega al máximo de su inventario" {
+    const capacidadIncial = jugador.capacidadInventario()
+    capacidadIncial.times({i=> jugador.recolectarItem(botella)})
+    assert.that(jugador.sinInventario())
   }
 
   test "Player vende items recolectador"{

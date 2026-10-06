@@ -16,7 +16,7 @@ object jugador inherits Personaje (position= game.center(), image= "player.png")
 		keyboard.right().onPressDo({ movimiento.mover(self, moverDer) })
 		keyboard.up().onPressDo({ movimiento.mover(self, moverArriba) })
 		keyboard.down().onPressDo({ movimiento.mover(self, moverAbajo) })
-		keyboard.a().onPressDo({movimiento.mover(self,moverDiagonal)})
+		//keyboard.a().onPressDo({movimiento.mover(self,moverDiagonal)})
   	}
 
     method recolectarItem(item){
@@ -34,7 +34,7 @@ object jugador inherits Personaje (position= game.center(), image= "player.png")
 	method vaciarInventario(){ //Vender
 		items_recolectados.clear()
 		self.inventario(0)
-		dinero = 0
+		self.ganarDinero(self.valorItemsRecolectados())
 	}
     method valorItemsRecolectados(){
         return self.items_recolectados().sum({item => item.valor()})
