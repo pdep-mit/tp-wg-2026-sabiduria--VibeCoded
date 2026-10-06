@@ -2,7 +2,9 @@
 
 //Cada cierto tiempo (depende del objeto) se regenera en otro lugar. Si se recogio el objeto no vuelve a aparecer hasta que se termine su tiempo de regeneracion.
 // Los objetos tienen un tiempo antes de desaparecer.
-
+object azar {
+	method numeroEntre(unMinimo, unMaximo) = (unMinimo .. unMaximo).anyOne()
+}
 object generador{
 
 	method crear(objeto){ //Hace aparecer el objeto en el mapa
@@ -12,8 +14,8 @@ object generador{
 
 	method ubicar(objeto){ //Le asigna la celda al objeto
 
-		const largoDelTablero = (0 .. game.width() - 1)
-		const altoDelTablero = (0 .. game.height() - 1)
+		const largoDelTablero = (0 .. game.width() - 2)
+		const altoDelTablero = (0 .. game.height() - 2)
 
 		const x = largoDelTablero.anyOne() //Coordenada random en X
 	    const y = altoDelTablero.anyOne() //Coordenada random en Y
@@ -23,20 +25,8 @@ object generador{
 	    else self.ubicar(objeto)
 	}
 
-}
-
-object planificador{ //Con este me fijo que los objetos cumplan los tiempos de desaparicion y regeneracion
-	method aparecer(objeto) {
-		generador.crear(objeto)
-		game.schedule(objeto.tiempoDesaparicion(), {self.desaparecer(objeto)})
-	}
-
-	method desaparecer(objeto) {
-		if (game.hasVisual(objeto)) game.removeVisual(objeto) //Si ya lo habia recogido el jugador no se elimina (por si rompe)
-		game.schedule(objeto.tiempoRegeneracion(), {self.aparecer(objeto)}) 
+	method spawnTimer(objeto){
+		//game.tick(azar.numeroEntre(10000,15000), objeto.spawn(), false)
+		game.schedule(azar.numeroEntre(8000,12000), {objeto.spawn()})
 	}
 }
-
-/*
-FALTA: que de algun lado se llame al planificador para poder comenzar el ciclo
-*/

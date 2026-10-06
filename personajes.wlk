@@ -1,4 +1,5 @@
 import movimientos.*
+import basura.*
 class Personaje {
 	var property position 
 	var property image
@@ -9,6 +10,7 @@ object jugador inherits Personaje (position= game.center(), image= "player.png")
 	var property capacidadInventario = 4 // inicialmente solo puede llevar 4 bolsas de basura
 	var property dinero = 0
 
+
 	method movimiento(){
     	keyboard.left().onPressDo({ movimiento.mover(self, moverIzq) })
 		keyboard.right().onPressDo({ movimiento.mover(self, moverDer) })
@@ -17,15 +19,30 @@ object jugador inherits Personaje (position= game.center(), image= "player.png")
 		keyboard.a().onPressDo({movimiento.mover(self,moverDiagonal)})
   	}
 
-   method recolectarItem(item){
-        self.inventario( self.inventario() + 1)
-        self.items_recolectados().add(item)
-
+    method recolectarItem(item){
+		if(self.sinInventario()) {
+			game.say(self,"¡Me quedé sin espacio!")
+		} else {
+				self.inventario(self.inventario() + 1)
+        		self.items_recolectados().add(item)
+				item.esRecolectadoPor(self)
+		}
     }
+	
+	method sinInventario() = (items_recolectados.size() >= capacidadInventario) 
 
+	method vaciarInventario(){ //Vender
+		items_recolectados.clear()
+		self.inventario(0)
+		dinero = 0
+	}
     method valorItemsRecolectados(){
-        return self.items_recolectados().map({item => item.valor()}).sum()
+        return self.items_recolectados().sum({item => item.valor()})
     }
+
+	method ganarDinero(cantidad) {
+		dinero+= cantidad
+	}
 }
 
 //const jugador = new Personaje(position = game.at(10,0), image= "player.png") 

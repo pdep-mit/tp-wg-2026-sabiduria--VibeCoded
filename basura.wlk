@@ -1,43 +1,37 @@
-//valor es el precio de venta, espacio es cuanto ocupa en el inventario, tiempoRegeneracion es cuanto tiempo pasa antes de que se vuelva a regenerar,
-//tiempoDesaparicion es cuanto tiempo está en el tablero antes de desaparecer
-object botella {
-	var property position = game.at(0, 0)
-	method image() = "botella.png"
-	method valor() = 4
-	method espacio() = 1
-    const property tiempoRegeneracion = 3000 //en ms
-    const property tiempoDesaparicion = 7000
+import generador.*
+import personajes.*
 
-    method serAgarrado(jugador){ /*hace algo ♦ polimorfico ♦ (implementar) */ }
+
+class Basura{
+	var property position = game.at(0, 0)
+	method image()
+	method valor()
+	method espacio()
+
+	method spawn(){
+		generador.crear(self)
+	}
+	method esRecolectadoPor(jugador){
+		jugador.ganarDinero(self.valor())
+		game.removeVisual(self)
+		generador.spawnTimer(self)
+	}
 }
 
-object caja {
-	var property position = game.at(0, 0)
-	method image() = "caja.png"
-	method valor() = 10
-	method espacio() = 2
-    const property tiempoRegeneracion = 3000 //en ms
-    const property tiempoDesaparicion = 7000
-
-    method serAgarrado(jugador){ /*hace algo ♦ polimorfico ♦ (implementar) */ }
+object botella inherits Basura {
+	override method image() = "botella.png"
+	override method valor() = 4
+	override method espacio() = 1
 }
 
-object papel {
-	var property position = game.at(0, 0)
-	method image() = "papel.png"
-	method valor() = 1
-	method espacio() = 1
-    const property tiempoRegeneracion = 3000 //en ms
-    const property tiempoDesaparicion = 7000
-
-    method serAgarrado(jugador){ /*hace algo ♦ polimorfico ♦ (implementar) */ }
+object caja inherits Basura {
+	override method image() = "caja.png"
+	override method valor() = 2
+	override method espacio() = 2
 }
 
-
-/*
-FALTA: 
-implementar lo del espacio que ocupan
-Agregar el serAgarrado
-Agregarle los sprites a las basuras
-
-*/
+object papel inherits Basura {
+	override method image() = "papel.png"
+	override method valor() = 1
+	override method espacio() = 1
+}

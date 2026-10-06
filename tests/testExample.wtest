@@ -1,10 +1,35 @@
+import mejoras.*
 // Archivo de tests de referencia, borrar luego de desarrollar propios
 import personajes.*
+import negocioMejoras.*
+import basura.*
 
 describe "groupo de tests" {
 
   test "Payer comeinza en el centro del tabler" {
     assert.equals(game.center(), jugador.position())
+  }
+
+  test "Player vende items recolectador"{
+    // jugador.recolectarItem(botella)
+    4.times({i=>jugador.recolectarItem(botella)})
+    negocioMejoras.venderBasura(jugador)
+    assert.equals(jugador.items_recolectados().size(), 0 )
+  }
+
+  test "Player vende items recolectador y gana dinero"{
+    // jugador.recolectarItem(botella)
+    4.times({i=>jugador.recolectarItem(botella)})
+    negocioMejoras.venderBasura(jugador)
+    assert.equals(jugador.dinero(), 16 )
+  }
+
+  test "Player vende items con la mejora de mayorValor"{
+    4.times({i => jugador.recolectarItem(botella)})
+    jugador.dinero(1000) // para que pueda comprar la mejora
+    negocioMejoras.comprarMejora(jugador, mayorValor)
+    negocioMejoras.venderBasura(jugador)
+    assert.equals(20, jugador.dinero())
   }
 
 }
