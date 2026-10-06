@@ -31,7 +31,7 @@ object caja inherits Basura {
 }
 
 object papel inherits Basura {
-	override method image() = "inv1.gif" //Falta agregar el asset
+	override method image() = "papel.png"
 	override method valor() = 1
 	override method espacio() = 1
 }
