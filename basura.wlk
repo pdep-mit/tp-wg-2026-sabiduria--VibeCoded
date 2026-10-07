@@ -19,22 +19,24 @@ class Basura{
 			planificador.spawnTimer(self)
 		}
 	}
+
+	method alColisionarCon(jugador) { jugador.recolectarItem(self)}
 }
 
 object botella inherits Basura {
 	override method image() = "botella.png"
-	override method valor() = 4
+	override method valor() = 50
 	override method espacio() = 1
 }
 
 object caja inherits Basura {
 	override method image() = "caja.png"
-	override method valor() = 2
+	override method valor() = 50
 	override method espacio() = 2
 }
 
 object papel inherits Basura {
 	override method image() = "papel.png"
-	override method valor() = 1
+	override method valor() = 50
 	override method espacio() = 1
 }

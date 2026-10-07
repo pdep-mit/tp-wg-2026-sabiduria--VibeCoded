@@ -2,6 +2,7 @@ import wollok.game.*
 import personajes.*
 import basura.*
 import generador.*
+import vendedor.*
 
 program HowToTrash {
 	// TODO: Cambiar esto por lo que necesiten
@@ -17,7 +18,10 @@ program HowToTrash {
 	planificador.spawnTimer(papel)
 
 	//Mecánicas
-	game.whenCollideDo(jugador, {item => jugador.recolectarItem(item)})
+	//game.whenCollideDo(jugador, {item => jugador.recolectarItem(item)})
 	jugador.movimiento()
+	vendedor.abrirNegocio()
+	game.whenCollideDo(jugador, {item => item.alColisionarCon(jugador)})
+
 	game.start()
 }

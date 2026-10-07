@@ -12,24 +12,10 @@ object negocioMejoras{
     }
 
     method venderBasura(alguien){
-        // alguien.dinero( alguien.valorItemsRecolectados() )
-        alguien.dinero( self.valorItems(alguien) )
-        alguien.items_recolectados().forEach({
-            item => alguien.items_recolectados().remove(item)
-        }) // elimino todos los items de la lista
+        alguien.ganarDinero( self.valorItems(alguien) )
+        alguien.items_recolectados().clear()
         alguien.inventario(0)
     }
 
-    method valorItems(persona){
-        if(!persona.items_recolectados().isEmpty()){
-            return persona.items_recolectados().sum({
-                item => item.valor() * bonus
-            })
-        } else {
-            return persona.dinero()
-        }
-        
-    }
-
-
+    method valorItems(persona) = persona.items_recolectados().sum({ item => item.valor() * bonus })
 }

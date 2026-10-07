@@ -2,7 +2,7 @@ import negocioMejoras.*
 
 object masInv{
     method image() = "inv1.gif"
-    const property precio = 100
+    const property precio = 150
     const property descripcion = "Aumenta la capacidad del inventario en 4 lugares"
     method ventaja(persona){
         persona.capacidadInventario( persona.capacidadInventario() + 4 )
@@ -12,7 +12,7 @@ object masInv{
 // idea de mejora en duda
 object masBasura{
     method image() = "masCapacidad.gif"
-    const property precio = 150
+    const property precio = 160
     const property descripcion = "Se quiere mudar mas gente a esta zona, eso quiere decir que habra mas basura"
     method ventaja(persona){
         // deberia agregar a una lista de objetos de basura, mas items, asi aparecen otros items
