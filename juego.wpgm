@@ -1,13 +1,27 @@
 import wollok.game.*
-import example.*
+import personajes.*
+import basura.*
+import generador.*
+import vendedor.*
 
-program NombreDeJuego {
+program HowToTrash {
 	// TODO: Cambiar esto por lo que necesiten
-	game.title("Grupo: ... | Nombre de jueguito")
-	game.height(10)
-	game.width(10)
+	game.title("Grupo: Vibecoded | How To Trash")
+	game.height(30)
+	game.width(30)
+	game.cellSize(20)
 
-	game.addVisual(player)
+	//Agregar Visuales
+	game.addVisual(jugador)
+	planificador.spawnTimer(botella)
+	planificador.spawnTimer(caja)
+	planificador.spawnTimer(papel)
+
+	//Mecánicas
+	//game.whenCollideDo(jugador, {item => jugador.recolectarItem(item)})
+	jugador.movimiento()
+	vendedor.abrirNegocio()
+	game.whenCollideDo(jugador, {item => item.alColisionarCon(jugador)})
 
 	game.start()
 }
