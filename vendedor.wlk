@@ -33,12 +33,16 @@ object vendedor {
     method tieneDineroPara(jugador, mejora) = jugador.dinero() >= mejora.precio()
 
     method ofrecer(mejora, jugador, puesto) {
-        if (self.tieneDineroPara(jugador, mejora)) {
-            negocioMejoras.comprarMejora(jugador, mejora)
-            game.removeVisual(puesto)
-            game.say(self, "¡Gracias por tu compra!")
-        } else {
-            game.say(self, "Dinero insuficiente: te faltan $" + (mejora.precio() - jugador.dinero()))
+        if (game.hasVisual(puesto)) {
+            if (!self.tieneDineroPara(jugador, mejora)) {
+                game.say(self, "Dinero insuficiente: te faltan $" + (mejora.precio() - jugador.dinero()))
+            } else if (!jugador.items_recolectados().isEmpty()) {
+                game.say(self, "Primero vendeme tu basura y despues comprás mejoras")
+            } else {
+                negocioMejoras.comprarMejora(jugador, mejora)
+                game.removeVisual(puesto)
+                game.say(self, "¡Gracias por tu compra! Te quedan $" + jugador.dinero())
+            }
         }
     }
 
