@@ -8,6 +8,7 @@ class Puesto {
 
     method image() = mejora.image()
     method text() = "$" + mejora.precio() // muestra el precio encima de la mejora
+    method textColor() = "009933FF"
 
     // Lo llama la colision del jugador (ver juego.wpgm)
     method alColisionarCon(jugador) {

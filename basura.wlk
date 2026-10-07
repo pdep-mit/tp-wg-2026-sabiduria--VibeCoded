@@ -14,7 +14,6 @@ class Basura{
 	}
 	method esRecolectadoPor(jugador){
 		if(game.hasVisual(self)) {
-			jugador.ganarDinero(self.valor())
 			game.removeVisual(self)
 			planificador.spawnTimer(self)
 		}

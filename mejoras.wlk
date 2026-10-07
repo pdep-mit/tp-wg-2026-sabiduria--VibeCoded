@@ -9,7 +9,6 @@ object masInv{
     }
 }
 
-// idea de mejora en duda
 object masBasura{
     method image() = "masCapacidad.gif"
     const property precio = 160
@@ -20,7 +19,6 @@ object masBasura{
     }
 }
 
-// idea de mejora en duda
 object mayorValor{
     method image() = "valorIncrease.png"
     const property precio = 170
