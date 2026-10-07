@@ -30,18 +30,23 @@ describe "grupo de tests" {
   }
 
   test "Player vende items recolectador y gana dinero"{
-    // jugador.recolectarItem(botella)
-    4.times({i=>jugador.recolectarItem(botella)})
+    const cantidad = 4
+    const dineroEsperado = cantidad * botella.valor()
+    cantidad.times({i=> jugador.recolectarItem(botella)})
     negocioMejoras.venderBasura(jugador)
-    assert.equals(jugador.dinero(), 16 )
+    assert.equals(dineroEsperado, jugador.dinero())
+
   }
 
   test "Player vende items con la mejora de mayorValor"{
     4.times({i => jugador.recolectarItem(botella)})
+    const valorBase = jugador.items_recolectados().sum({item => item.valor()})
     jugador.dinero(1000) // para que pueda comprar la mejora
     negocioMejoras.comprarMejora(jugador, mayorValor)
+    const dineroInicial = jugador.dinero()
     negocioMejoras.venderBasura(jugador)
-    assert.equals(20, jugador.dinero())
+    const dineroEsperado= (valorBase) * 1.25 + dineroInicial
+    assert.equals(dineroEsperado, jugador.dinero())
   }
 
 }
