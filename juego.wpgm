@@ -3,6 +3,7 @@ import personajes.*
 import basura.*
 import generador.*
 import vendedor.*
+import hud.*
 
 program HowToTrash {
 	// TODO: Cambiar esto por lo que necesiten
@@ -17,12 +18,20 @@ program HowToTrash {
 	planificador.spawnTimer(caja)
 	planificador.spawnTimer(papel)
 
+	// game.addVisual(cartelInv) // agregar cuando se haya definido su posicion
+	// game.addVisual(cartelCash) // agregar cuando se haya definido su posicion
+
+
 	//Mecánicas
 	//game.whenCollideDo(jugador, {item => jugador.recolectarItem(item)})
 	jugador.movimiento()
 	jugador.interaccion()
 	vendedor.abrirNegocio()
-	game.whenCollideDo(jugador, {item => item.alColisionarCon(jugador)})
+	game.whenCollideDo(jugador, {item => item.alColisionarCon(jugador)
+									cartelInv.actualizar(jugador) // para el contador de inventario
+									cartelCash.actualizar(jugador) // para el contador de dinero
+								})
+
 
 	game.start()
 }
