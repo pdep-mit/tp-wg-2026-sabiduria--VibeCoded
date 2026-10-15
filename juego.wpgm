@@ -3,6 +3,7 @@ import personajes.*
 import basura.*
 import generador.*
 import vendedor.*
+import jefe.*
 
 program HowToTrash {
 	// TODO: Cambiar esto por lo que necesiten
@@ -12,7 +13,9 @@ program HowToTrash {
 	game.cellSize(35)
 
 	//Agregar Visuales
+	game.boardGround("fondo.png")
 	game.addVisual(jugador)
+	game.addVisual(jefe) //Borrar, es oara ver el sprite no mas
 	planificador.aparecer(botella)
 	planificador.aparecer(caja)
 	planificador.aparecer(papel)
