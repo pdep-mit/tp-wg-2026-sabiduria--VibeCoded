@@ -7,15 +7,15 @@ import vendedor.*
 program HowToTrash {
 	// TODO: Cambiar esto por lo que necesiten
 	game.title("Grupo: Vibecoded | How To Trash")
-	game.height(30)
-	game.width(30)
-	game.cellSize(30)
+	game.height(15)
+	game.width(15)
+	game.cellSize(35)
 
 	//Agregar Visuales
 	game.addVisual(jugador)
-	planificador.spawnTimer(botella)
-	planificador.spawnTimer(caja)
-	planificador.spawnTimer(papel)
+	planificador.aparecer(botella)
+	planificador.aparecer(caja)
+	planificador.aparecer(papel)
 
 	//Mecánicas
 	//game.whenCollideDo(jugador, {item => jugador.recolectarItem(item)})
