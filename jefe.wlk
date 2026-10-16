@@ -1,3 +1,6 @@
+import wollok.game.*
+import generador.* 
+
 /*La idea es que aparezca despues de un tiempo (1min por ejemplo), el jugador tenga que recoger y vender todo lo que pueda en ese tiempo
 para estar preparado para el enfrentamiento
 
@@ -9,25 +12,38 @@ El jefe ocasionalmente aparecerá en alguna parte del borde superior de la panta
 
 El jugador no puede tocar al jefe (o si, pero seria muy facil golpearlo con la basura arrojada, sin necesidad de apuntar). Estará alejado siempre minimo 2 casillas
 
-==Propuestas de ataques del jefe:
--> Se ilumina toda una linea de celdas, despues de un tiempo se recibe daño si el jugador está parada en ellas
--> Algun elemento que se mueva estilo juego de la viborita, movimiento random, si toca al jugador se pierde 1 vida
--> Aparecen paredes u objetos que no permiten pararse en esa(s) celda(s), dificultando esquivar los otros ataques
 */
 
 object jefe{
-    const hitBox = 5 //El "ancho" del jefe, es un sprite mas bien alargado para que el jugador tenga que alinearse para pegarle  
+    const hitBox = 5 //El "ancho" del jefe, es un sprite mas bien alargado para que el jugador tenga que alinearse en la misma columna para pegarle  
     var property vida = 10
     method image() = "jefe.png"
     var property position = game.at(5, game.height() - 2)
 
-    method atacar(){ /*COMPLETAR*/}
+    method aparecer() {
+		self.reubicar()
+		game.addVisual(self)
+		game.onTick(15000, "moverJefe", {self.reubicar()})
+        //Llamar al activador de timer de los ataques
+	}
 
+    method reubicar() {
+		position = game.at(azar.numeroEntre(0, game.width() - hitBox), game.height() - 2)
+	}
+
+    method esGolpeadoEn(coordenada) = game.hasVisual(self) && coordenada.between(position.x(), position.x() + hitBox - 1)
+
+    method alColisionarCon(jugador) { }
+    
     method recibirDanio(cantidad){
         vida = vida - cantidad
         if (vida <= 0) self.morir()
     }
 
-    method morir(){/*COMPLETAR*/}
+    method morir(){
+        game.removeTickEvent("moverJefe")
+        //Remover el timer de los ataques
+	    game.removeVisual(self)
+    }
 
 }

@@ -2,6 +2,10 @@
 
 //Cada cierto tiempo (depende del objeto) se regenera en otro lugar. Si se recogio el objeto no vuelve a aparecer hasta que se termine su tiempo de regeneracion.
 // Los objetos tienen un tiempo antes de desaparecer.
+
+object azar {
+	method numeroEntre(unMinimo, unMaximo) = (unMinimo .. unMaximo).anyOne()
+}
 object generador{
 
 	method crear(objeto){ //Hace aparecer el objeto en el mapa

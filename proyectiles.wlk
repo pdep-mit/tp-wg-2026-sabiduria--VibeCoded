@@ -1,3 +1,5 @@
+import jefe.*
+
 class Proyectil{ // clase de TESTING -> funciona
     var property image
     var property position
@@ -26,6 +28,11 @@ class Proyectil{ // clase de TESTING -> funciona
 
 	method disparar(direccion){
 		const siguientePos = direccion.siguiente(self.position())
+
+		if (jefe.esGolpeadoEn(siguientePos)) {
+			jefe.recibirDanio(danio)
+			game.removeVisual(self)
+		} else 
 		if (siguientePos.x() >=-2 && siguientePos.x() < game.width()+2 &&
 		    siguientePos.y() >=-2 && siguientePos.y() < game.height()+2 &&
 		    game.hasVisual(self)) {
@@ -40,11 +47,6 @@ class Proyectil{ // clase de TESTING -> funciona
 		} else {
 			game.removeVisual(self)
 		}
-	}
-
-
-	method impactarBala(alguien){
-		alguien.vida( alguien.vida() - self.danio() )
 	}
     
 }
