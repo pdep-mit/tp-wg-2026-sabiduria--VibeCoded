@@ -2,15 +2,11 @@
 
 //Cada cierto tiempo (depende del objeto) se regenera en otro lugar. Si se recogio el objeto no vuelve a aparecer hasta que se termine su tiempo de regeneracion.
 // Los objetos tienen un tiempo antes de desaparecer.
-object azar {
-	method numeroEntre(unMinimo, unMaximo) = (unMinimo .. unMaximo).anyOne()
-}
 object generador{
 
 	method crear(objeto){ //Hace aparecer el objeto en el mapa
 		self.ubicar(objeto)
 		game.addVisual(objeto)
-		planificador.desaparecer(objeto)
 	}
 
 	method ubicar(objeto){ //Le asigna la celda al objeto
@@ -29,16 +25,13 @@ object generador{
 }
 
 object planificador {
-	method spawnTimer(objeto){
-		game.schedule(azar.numeroEntre(5000,12000), {objeto.spawn()})
+	method aparecer(objeto) {
+		generador.crear(objeto)
+		game.schedule(objeto.tiempoDesaparicion(), {self.desaparecer(objeto)})
 	}
 
-	method desaparecer(objeto){
-		game.schedule(objeto.tiempoDesaparicion(), {
-			if (game.hasVisual(objeto)) { //Si la basura está en el mapa
-				game.removeVisual(objeto) 
-				self.spawnTimer(objeto)
-			}
-		})
+	method desaparecer(objeto) {
+		if (game.hasVisual(objeto)) game.removeVisual(objeto) //Si ya lo habia recogido el jugador no se elimina (por si rompe)
+		game.schedule(objeto.tiempoRegeneracion(), {self.aparecer(objeto)}) 
 	}
 }

@@ -4,6 +4,7 @@ import personajes.*
 
 class Basura{
 	var property position = game.at(0, 0)
+	const property tiempoRegeneracion = 3000 // en ms
 	const property tiempoDesaparicion = 7000 // en ms
 	method image()
 	method valor()
@@ -15,11 +16,10 @@ class Basura{
 	method esRecolectadoPor(jugador){
 		if(game.hasVisual(self)) {
 			game.removeVisual(self)
-			planificador.spawnTimer(self)
 		}
 	}
 
-	method alColisionarCon(jugador) { jugador.recolectarItem(self)}
+	method alColisionarCon(jugador) {jugador.recolectarItem(self)}
 }
 
 object botella inherits Basura {

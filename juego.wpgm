@@ -3,7 +3,11 @@ import personajes.*
 import basura.*
 import generador.*
 import vendedor.*
+<<<<<<< HEAD
 import hud.*
+=======
+import jefe.*
+>>>>>>> origin/rama-jefe
 
 program HowToTrash {
 	// TODO: Cambiar esto por lo que necesiten
@@ -13,11 +17,16 @@ program HowToTrash {
 	game.cellSize(35)
 
 	//Agregar Visuales
+<<<<<<< HEAD
 	game.boardGround("fondo3.jpg")
+=======
+	game.boardGround("fondo.png")
+>>>>>>> origin/rama-jefe
 	game.addVisual(jugador)
-	planificador.spawnTimer(botella)
-	planificador.spawnTimer(caja)
-	planificador.spawnTimer(papel)
+	game.addVisual(jefe) //Borrar, es oara ver el sprite no mas
+	planificador.aparecer(botella)
+	planificador.aparecer(caja)
+	planificador.aparecer(papel)
 
 	// game.addVisual(cartelInv) // agregar cuando se haya definido su posicion
 	// game.addVisual(cartelCash) // agregar cuando se haya definido su posicion
