@@ -31,6 +31,11 @@ object vendedor {
         puestos.forEach({ puesto => game.addVisual(puesto) })
     }
 
+    method cerrarNegocio(){
+        game.removeVisual(self)
+        puestos.forEach({ puesto => game.removeVisual(puesto)})
+    }
+
     method tieneDineroPara(jugador, mejora) = jugador.dinero() >= mejora.precio()
 
     method ofrecer(mejora, jugador, puesto) {

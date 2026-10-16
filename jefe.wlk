@@ -1,3 +1,4 @@
+import vendedor.*
 import wollok.game.*
 import generador.* 
 
@@ -11,6 +12,9 @@ El jugador dispone de n vidas, cada ataque certero del jefe baja 1. Al llegar a 
 El jefe ocasionalmente aparecerá en alguna parte del borde superior de la pantalla, momento en el que el jugador lo atacará
 
 El jugador no puede tocar al jefe (o si, pero seria muy facil golpearlo con la basura arrojada, sin necesidad de apuntar). Estará alejado siempre minimo 2 casillas
+
+=== FALTA === 
+ - Que el jugador no se pueda acercar al jefe
 
 */
 
@@ -27,11 +31,24 @@ object jefe{
         //Llamar al activador de timer de los ataques
 	}
 
+    // Cumple lo mismo que hacia aparecer() solo que es un loop mientras el jefe este vivo y sea visible
+    method actualizarJefe(){
+        if(game.hasVisual(self)){
+    		game.onTick(15000, "moverJefe", {self.reubicar()
+                                                self.actualizarJefe()})
+        } else {
+            vendedor.cerrarNegocio()
+            self.reubicar()
+            game.addVisual(self)
+            self.actualizarJefe()
+        }
+    }
+
     method reubicar() {
 		position = game.at(azar.numeroEntre(0, game.width() - hitBox), game.height() - 2)
 	}
 
-    method esGolpeadoEn(coordenada) = game.hasVisual(self) && coordenada.between(position.x(), position.x() + hitBox - 1)
+    method esGolpeadoEn(coordenada) = game.hasVisual(self) && coordenada.x().between(position.x(), position.x() + hitBox - 1) && coordenada.y() == self.position().y()
 
     method alColisionarCon(jugador) { }
     

@@ -5,10 +5,10 @@ class Proyectil{ // clase de TESTING -> funciona
     var property position
 	const property danio = 50
 	
-	/* Se activa cuando el personaje tira un proyectil
+	/* Se activa cuando el personaje tira un proyectil */
 	method alColisionarCon(alguien){
 		game.say(alguien, "Me choque con un proyectil")
-	} */
+	} 
 /*
 	method dispararDer(){
 		if(self.position().x()+1 != game.width() -1 && game.hasVisual(self) ){

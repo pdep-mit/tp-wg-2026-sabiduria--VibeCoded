@@ -7,7 +7,7 @@ import hud.*
 import jefe.*
 
 program HowToTrash {
-	// TODO: Cambiar esto por lo que necesiten
+	// const tick = game.tick(1000, {contadorJefe.actualizar(jugador)}, true) // para el contador de tiempo restante antes que aparezca el jefe ( agregar luego )
 	game.title("Grupo: Vibecoded | How To Trash")
 	game.height(15)
 	game.width(15)
@@ -16,13 +16,15 @@ program HowToTrash {
 	//Agregar Visuales
 	game.boardGround("fondo3.jpg")
 	game.addVisual(jugador)
-	jefe.aparecer() //Borrar, es oara ver el sprite no mas
+	// jefe.aparecer() //Borrar, es oara ver el sprite no mas
+	game.schedule(60000, {jefe.actualizarJefe()})
 	planificador.aparecer(botella)
 	planificador.aparecer(caja)
 	planificador.aparecer(papel)
 	
 	// game.addVisual(cartelInv) // agregar cuando se haya definido su posicion
 	// game.addVisual(cartelCash) // agregar cuando se haya definido su posicion
+	// game.addVisual(contadorJefe) // agregar cuando se haya definido su posicion
 
 
 	//Mecánicas
@@ -30,6 +32,7 @@ program HowToTrash {
 	jugador.movimiento()
 	jugador.interaccion()
 	vendedor.abrirNegocio()
+	// tick.start() // actualiza el contador hasta que aparece el jefe ( agregar luego )
 	game.whenCollideDo(jugador, {item => item.alColisionarCon(jugador)
 									cartelInv.actualizar(jugador) // para el contador de inventario
 									cartelCash.actualizar(jugador) // para el contador de dinero

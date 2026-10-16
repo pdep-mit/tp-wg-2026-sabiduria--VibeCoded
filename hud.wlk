@@ -25,3 +25,20 @@ object cartelInv{
 
     }
 }
+
+object contadorJefe{
+    var property text = timer.toString()
+    var timer = 60
+    var property textColor = "FFFFFF" 
+    const property position = game.at(14,4) // cambiar
+
+    method actualizar(persona){
+        if(timer>0){
+            timer -= 1
+            text = timer.toString()
+        } else {
+            game.removeVisual(self)
+        }
+    }
+
+}
