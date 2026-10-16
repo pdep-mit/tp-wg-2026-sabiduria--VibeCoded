@@ -14,10 +14,11 @@ object jugador inherits Personaje (position= game.center(), image= "player.png")
 
 
 	method movimiento(){
-    	keyboard.left().onPressDo({ movimiento.mover(self, moverIzq) })
-		keyboard.right().onPressDo({ movimiento.mover(self, moverDer) })
-		keyboard.up().onPressDo({ movimiento.mover(self, moverArriba) })
-		keyboard.down().onPressDo({ movimiento.mover(self, moverAbajo) })
+		//Teclas para disparar
+   		keyboard.right().onPressDo({ self.lanzarBasura(moverDer) })
+		keyboard.left().onPressDo({ self.lanzarBasura(moverIzq) })
+		keyboard.up().onPressDo({ self.lanzarBasura(moverArriba) })
+		keyboard.down().onPressDo({ self.lanzarBasura(moverAbajo) })
 
 		// Para mover el jugador manteniendo las teclas. Cada 300 milisengundos se ejecuta la accion de movimiento
 
@@ -25,7 +26,7 @@ object jugador inherits Personaje (position= game.center(), image= "player.png")
 		keyboard.d().whilePressedDo({ movimiento.mover(self, moverDer	)}, 300)
 		keyboard.w().whilePressedDo({ movimiento.mover(self, moverArriba)}, 300)
 		keyboard.s().whilePressedDo({ movimiento.mover(self, moverAbajo	)}, 300)
-		//keyboard.a().onPressDo({movimiento.mover(self,moverDiagonal)})
+		//keyboard.a().onPressDo({movimiento.mover(self,moverDiagonal)}) No sirve para nada(?
   	}
 
     method recolectarItem(item){
@@ -53,15 +54,15 @@ object jugador inherits Personaje (position= game.center(), image= "player.png")
 	}
 
 	// TESTING: Funcion para el combate contra jefes
-	method lanzarBasura(){
+	method lanzarBasura(direccion){
 		if(!items_recolectados.isEmpty())
 		{
 			const basuraTirar = items_recolectados.anyOne()
 			items_recolectados.remove(basuraTirar)
 			cartelInv.actualizar(self)
-			const proyectil = new Proyectil(image=basuraTirar.image(), position=self.position().right(1))
+			const proyectil = new Proyectil(image=basuraTirar.image(), position=self.position())
 			game.addVisual(proyectil)
-			proyectil.dispararDer()
+			proyectil.disparar(direccion)
 		} else {
 			game.say(self, "No tengo items para tirar")
 		}
@@ -73,12 +74,9 @@ object jugador inherits Personaje (position= game.center(), image= "player.png")
 	keyboard.i().onPressDo({
 			game.say(self, "Tengo " + items_recolectados.size().toString() + " items")
 		})
-	keyboard.f().onPressDo({self.lanzarBasura()})
+	//keyboard.f().onPressDo({self.lanzarBasura()})
 	}
 }
 
 // TODO: la persona que lleva a la fase del jefe
 // TODO: el jefe
-
-
-//const jugador = new Personaje(position = game.at(10,0), image= "player.png") 

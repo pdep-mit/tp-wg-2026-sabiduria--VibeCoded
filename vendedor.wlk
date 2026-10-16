@@ -17,13 +17,13 @@ class Puesto {
 }
 
 object vendedor {
-    var property position = game.at(3, 25)
+    var property position = game.at(3, 10)
     const property image = "vendedor.png" 
 
     const puestos = [
-        new Puesto(mejora = masInv, position = game.at(6, 25)),
-        new Puesto(mejora = masBasura, position = game.at(9, 25)),
-        new Puesto(mejora = mayorValor, position = game.at(12, 25))
+        new Puesto(mejora = masInv, position = game.at(6, 10)),
+        new Puesto(mejora = masBasura, position = game.at(9, 10)),
+        new Puesto(mejora = mayorValor, position = game.at(12, 10))
     ]
 
     method abrirNegocio() {
