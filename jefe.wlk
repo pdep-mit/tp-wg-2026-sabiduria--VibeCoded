@@ -26,7 +26,7 @@ object jefe{
 
     method aparecer() {
 		self.reubicar()
-		game.addVisual(self)
+        if(!game.hasVisual(self)) game.addVisual(self)
 		game.onTick(15000, "moverJefe", {self.reubicar()})
         //Llamar al activador de timer de los ataques
 	}
