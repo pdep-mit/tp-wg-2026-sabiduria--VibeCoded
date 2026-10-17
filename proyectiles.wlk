@@ -7,7 +7,7 @@ class Proyectil{ // clase de TESTING -> funciona
 	
 	/* Se activa cuando el personaje tira un proyectil */
 	method alColisionarCon(alguien){
-		game.say(alguien, "Me choque con un proyectil")
+		return
 	} 
 /*
 	method dispararDer(){

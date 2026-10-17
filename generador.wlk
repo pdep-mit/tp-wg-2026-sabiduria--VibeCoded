@@ -3,7 +3,7 @@ import basura.*
 
 //Cada cierto tiempo (depende del objeto) se regenera en otro lugar. Si se recogio el objeto no vuelve a aparecer hasta que se termine su tiempo de regeneracion.
 // Los objetos tienen un tiempo antes de desaparecer.
-
+import movimientos.*
 object azar {
 	method numeroEntre(unMinimo, unMaximo) = (unMinimo .. unMaximo).anyOne()
 }
@@ -17,7 +17,7 @@ object generador{
 	method ubicar(objeto){ //Le asigna la celda al objeto
 
 		const largoDelTablero = (0 .. game.width() - 2)
-		const altoDelTablero = (0 .. game.height() - 2)
+		const altoDelTablero = (0 .. movimiento.techo() - 2)
 
 		const x = largoDelTablero.anyOne() //Coordenada random en X
 	    const y = altoDelTablero.anyOne() //Coordenada random en Y
