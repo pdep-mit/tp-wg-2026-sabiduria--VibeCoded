@@ -1,3 +1,5 @@
+import generador.*
+import jefe.*
 import wollok.game.*
 import mejoras.*
 import negocioMejoras.*
@@ -17,23 +19,32 @@ class Puesto {
 }
 
 object vendedor {
-    var property position = game.at(3, 10)
+    var property position = game.at(3, 11)
     const property image = "vendedor.png" 
 
     const puestos = [
-        new Puesto(mejora = masInv, position = game.at(6, 10)),
-        new Puesto(mejora = masBasura, position = game.at(9, 10)),
-        new Puesto(mejora = mayorValor, position = game.at(12, 10))
+        new Puesto(mejora = masInv, position = game.at(6, 11)),
+        new Puesto(mejora = masBasura, position = game.at(8, 11)),
+        new Puesto(mejora = mayorValor, position = game.at(10, 11))
     ]
-
+    const puestosArmamento = [
+        new Puesto(mejora = masVida, position = game.at(6,11)),
+        new Puesto(mejora = masDanio, position = game.at(8,11))
+    ]
     method abrirNegocio() {
         game.addVisual(self)
-        puestos.forEach({ puesto => game.addVisual(puesto) })
+        self.mostrarPuestos()
+    }
+    method mostrarPuestos() {
+        puestosActivos.forEach({ puesto=> game.addVisual(puesto)})
     }
 
+    method cerrarPuestos(){
+        puestosActivos.forEach({puesto => if(game.hasVisual(puesto)) game.removeVisual(puesto)})
+    }
     method cerrarNegocio(){
         game.removeVisual(self)
-        puestos.forEach({ puesto => game.removeVisual(puesto)})
+        self.cerrarPuestos()
     }
 
     method tieneDineroPara(jugador, mejora) = jugador.dinero() >= mejora.precio()
@@ -62,7 +73,37 @@ object vendedor {
             vendioHaceUnMomento = true
             game.schedule(1500, { vendioHaceUnMomento = false })
         } else if (!vendioHaceUnMomento) {
-            game.say(self, "¡Bienvenido a mi tienda! Traeme basura o pasá por arriba de una mejora para comprarla")
+            if(etapaFarmeo) {
+                game.say(self, "¡Bienvenido a mi tienda! Traeme basura o pasá por arriba de una mejora para comprarla")
+            } else {
+                game.say(self, "Preparate para la pelea contra el jefe")
+                self.iniciarBoss()
+            }
+        }
+    }
+    /*
+    method hablar(){
+        if(!etapaFarmeo){
+            game.say(self, "")
+        }
+    }*/
+    var property etapaFarmeo = true
+    var property puestosActivos = puestos
+    method cambiarMejoras(){
+        etapaFarmeo = false
+        self.cerrarPuestos()
+        puestosActivos = puestosArmamento
+        self.mostrarPuestos()
+        game.say(self, "Terminó la etapa de farmeo, equipate antes de pelear contra el jefe final")
+    }
+
+    method iniciarBoss(){
+        if (!etapaFarmeo) {
+            game.schedule(5000, {
+                self.cerrarNegocio()
+                planificador.despausarBasura()
+                jefe.aparecer()
+            })
         }
     }
 }

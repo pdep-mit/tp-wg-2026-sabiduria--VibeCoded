@@ -28,7 +28,23 @@ object mayorValor{
     }
 }
 
+object masVida{
+    method image() = "valorIncrease.png"
+    const property precio = 170
+    const property descripcion = "Aumenta el valor de la basura al venderla en un 25%"
+    method ventaje(persona){
+        //TODO
+    }
+}
 
+object masDanio{
+    method image() = "valorIncrease.png"
+    const property precio = 170
+    const property descripcion = "Aumenta el valor de la basura al venderla en un 25%"
+    method ventaje(persona){
+        //TODO
+    }
+}
 
 
 // ideas posibles de mejoras:

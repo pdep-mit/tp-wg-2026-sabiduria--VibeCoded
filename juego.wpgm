@@ -17,14 +17,19 @@ program HowToTrash {
 	game.boardGround("fondo3.jpg")
 	game.addVisual(jugador)
 	// jefe.aparecer() //Borrar, es oara ver el sprite no mas
-	game.schedule(60000, {jefe.actualizarJefe()})
+	//game.schedule(20000, {jefe.actualizarJefe()})
+	game.schedule(32000, {
+		planificador.pausarBasura()
+		//planificador.limpiarBasura()
+		vendedor.cambiarMejoras()
+	})
 	planificador.aparecer(botella)
 	planificador.aparecer(caja)
 	planificador.aparecer(papel)
 	
-	// game.addVisual(cartelInv) // agregar cuando se haya definido su posicion
-	// game.addVisual(cartelCash) // agregar cuando se haya definido su posicion
-	// game.addVisual(contadorJefe) // agregar cuando se haya definido su posicion
+	 game.addVisual(cartelInv) // agregar cuando se haya definido su posicion
+	 game.addVisual(cartelCash) // agregar cuando se haya definido su posicion
+	 game.addVisual(contadorJefe) // agregar cuando se haya definido su posicion
 
 
 	//Mecánicas
