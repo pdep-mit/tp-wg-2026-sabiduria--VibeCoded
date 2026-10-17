@@ -1,3 +1,4 @@
+import movimientos.*
 import vendedor.*
 import wollok.game.*
 import generador.* 
@@ -14,8 +15,7 @@ El jefe ocasionalmente aparecerá en alguna parte del borde superior de la panta
 El jugador no puede tocar al jefe (o si, pero seria muy facil golpearlo con la basura arrojada, sin necesidad de apuntar). Estará alejado siempre minimo 2 casillas
 
 === FALTA === 
- - Que el jugador no se pueda acercar al jefe
-
+ - Ataques del jefe
 */
 
 object jefe{
@@ -35,11 +35,12 @@ object jefe{
     method actualizarJefe(){
         if(game.hasVisual(self)){
     		game.onTick(15000, "moverJefe", {self.reubicar()
-                                                self.actualizarJefe()})
+                                                })
         } else {
             vendedor.cerrarNegocio()
             self.reubicar()
             game.addVisual(self)
+            movimiento.techo( self.position().y() - 2 ) // Por ahora cuando aparece el jefe, el jugador solo va a poder acercarse a 2 celdas de distancia del jefe
             self.actualizarJefe()
         }
     }
@@ -61,6 +62,7 @@ object jefe{
         game.removeTickEvent("moverJefe")
         //Remover el timer de los ataques
 	    game.removeVisual(self)
+        movimiento.techo(15) // vuelve a default
     }
 
 }
