@@ -23,27 +23,16 @@ object jefe{
     var property vida = 10
     method image() = "jefe.png"
     var property position = game.at(5, game.height() - 2)
+    const tiempoDeReubicacion = 10000 // tiempo para reubicar el boss
+    const tick = game.tick(tiempoDeReubicacion, {self.reubicar() }, true) // este tick se encarga de reubicar al jefe cada tiempoDeReubicacion
 
     method aparecer() {
-		self.reubicar()
-        if(!game.hasVisual(self)) game.addVisual(self)
-		game.onTick(15000, "moverJefe", {self.reubicar()})
-        //Llamar al activador de timer de los ataques
-	}
-
-    // Cumple lo mismo que hacia aparecer() solo que es un loop mientras el jefe este vivo y sea visible
-    method actualizarJefe(){
-        if(game.hasVisual(self)){
-    		game.onTick(15000, "moverJefe", {self.reubicar()
-                                                })
-        } else {
-            vendedor.cerrarNegocio()
-            self.reubicar()
+        if(not game.hasVisual(self)){
+            tick.start() // empieza el tick de reubicacion
+            movimiento.techo(self.position().y() - 2)// Por ahora cuando aparece el jefe, el jugador solo va a poder acercarse a 2 celdas de distancia del jefe
             game.addVisual(self)
-            movimiento.techo( self.position().y() - 2 ) // Por ahora cuando aparece el jefe, el jugador solo va a poder acercarse a 2 celdas de distancia del jefe
-            self.actualizarJefe()
         }
-    }
+	}
 
     method reubicar() {
 		position = game.at(azar.numeroEntre(0, game.width() - hitBox), game.height() - 2)
@@ -60,6 +49,7 @@ object jefe{
 
     method morir(){
         game.removeTickEvent("moverJefe")
+        tick.stop() // detiene la ejecucion del tick de reubicacion
         //Remover el timer de los ataques
 	    game.removeVisual(self)
         movimiento.techo(15) // vuelve a default
