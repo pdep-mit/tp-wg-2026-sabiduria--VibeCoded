@@ -36,7 +36,7 @@ object mayorValor inherits Ventaja (
 
 object masVida inherits Ventaja(
     image = "corazon1.png",
-    precio = 150,
+    precio = 250,
     descripcion = "Aumenta la salud del personaje"){
     override method ventaja(persona){
         persona.vidas(persona.vidas() + 1)
@@ -45,10 +45,10 @@ object masVida inherits Ventaja(
 
 object masDanio inherits Ventaja(
     image = "danio.png",
-    precio = 150,
+    precio = 250,
     descripcion = "Aumenta el daño del personaje"){
     override method ventaja(persona){
-        persona.danio((persona.danio() + 0.25))
+        persona.danio((persona.danio() + 0.5))
     }
 }
 

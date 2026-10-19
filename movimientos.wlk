@@ -7,6 +7,8 @@ object movimiento {
         if (nuevaPos.x() >= 0 && nuevaPos.x() < game.width() - 1 &&
 			nuevaPos.y() >= 0 && nuevaPos.y() < techo - 1)
 		    personaje.position(nuevaPos)
+			personaje.caminar()
+			game.schedule(150, {personaje.quedarseQuieto()})
 	}	
 }
 

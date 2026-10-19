@@ -51,7 +51,7 @@ object ataqueRecto{
 class Tentaculo{
     var property position
     var property hizoDanio = false
-    method image() = "tentaculoOnda3.gif"
+    method image() = "tentaculoOnda.gif"
 
     method alColisionarCon(alguien){
         if(!hizoDanio) {
