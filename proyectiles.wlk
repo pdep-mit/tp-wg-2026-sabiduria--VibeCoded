@@ -1,9 +1,9 @@
 import jefe.*
-
+import personajes.*
 class Proyectil{ // clase de TESTING -> funciona
     var property image
     var property position
-	const property danio = 50
+	//const property danio = 1
 	
 	/* Se activa cuando el personaje tira un proyectil */
 	method alColisionarCon(alguien){
@@ -30,7 +30,7 @@ class Proyectil{ // clase de TESTING -> funciona
 		const siguientePos = direccion.siguiente(self.position())
 
 		if (jefe.esGolpeadoEn(siguientePos)) {
-			jefe.recibirDanio(danio)
+			jefe.recibirDanio(jugador.danio())
 			game.removeVisual(self)
 		} else 
 		if (siguientePos.x() >=-2 && siguientePos.x() < game.width()+2 &&

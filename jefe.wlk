@@ -48,7 +48,7 @@ object jefe{
         vida = vida - cantidad
         if (vida <= 0) self.morir()
     }
-
+    
     method morir(){
         game.removeTickEvent("timerAtaques")
         tick.stop() // detiene la ejecucion del tick de reubicacion

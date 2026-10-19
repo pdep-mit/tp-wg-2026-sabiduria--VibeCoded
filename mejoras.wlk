@@ -1,48 +1,54 @@
+import generador.*
 import negocioMejoras.*
-
-object masInv{
-    method image() = "inv1.gif"
-    const property precio = 150
-    const property descripcion = "Aumenta la capacidad del inventario en 4 lugares"
-    method ventaja(persona){
-        persona.capacidadInventario( persona.capacidadInventario() + 4 )
-    }
+class Ventaja {
+    const property image 
+    const property precio
+    const property descripcion
+    method ventaja(persona)
 }
 
-object masBasura{
-    method image() = "masCapacidad.gif"
-    const property precio = 160
-    const property descripcion = "Se quiere mudar mas gente a esta zona, eso quiere decir que habra mas basura"
-    method ventaja(persona){
-        // deberia agregar a una lista de objetos de basura, mas items, asi aparecen otros items
-        // basura.aplicarMejora(null)
-    }
+object masInv inherits Ventaja (
+    image= "inv1.gif", 
+    precio = 150, 
+    descripcion = "Aumenta la capacidad del inventario en 4 lugares") {
+        override method ventaja(persona){
+            persona.capacidadInventario( persona.capacidadInventario() + 4 )
+        } 
+}
+object masBasura inherits Ventaja (
+    image= "masCapacidad.gif", 
+    precio = 160, 
+    descripcion= "Se quiere mudar mas gente a esta zona, eso quiere decir que habra mas basura") {
+        override method ventaja(persona){
+            planificador.agregarBasura()
+        }
 }
 
-object mayorValor{
-    method image() = "valorIncrease.png"
-    const property precio = 170
-    const property descripcion = "Aumenta el valor de la basura al venderla en un 25%"
-    method ventaja(_){
+
+object mayorValor inherits Ventaja (
+    image = "valorIncrease.png",
+    precio = 170,
+    descripcion = "Aumenta el valor de la basura al venderla en un 25%") {
+    override method ventaja(_){
         negocioMejoras.bonus(1.25)
     }
 }
 
-object masVida{
-    method image() = "valorIncrease.png"
-    const property precio = 170
-    const property descripcion = "Aumenta el valor de la basura al venderla en un 25%"
-    method ventaja(persona){
-        //TODO
+object masVida inherits Ventaja(
+    image = "corazon1.png",
+    precio = 150,
+    descripcion = "Aumenta la salud del personaje"){
+    override method ventaja(persona){
+        persona.vidas(persona.vidas() + 1)
     }
 }
 
-object masDanio{
-    method image() = "valorIncrease.png"
-    const property precio = 170
-    const property descripcion = "Aumenta el valor de la basura al venderla en un 25%"
-    method ventaja(persona){
-        //TODO
+object masDanio inherits Ventaja(
+    image = "danio.png",
+    precio = 150,
+    descripcion = "Aumenta el daño del personaje"){
+    override method ventaja(persona){
+        persona.danio((persona.danio() + 0.25))
     }
 }
 

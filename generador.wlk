@@ -30,6 +30,9 @@ object generador{
 }
 
 object planificador {
+	var property objetos = [new Botella(), new Caja(), new Papel()]
+	var property objetosProgramados = [] 
+
 	var property spawnActivos = true
 	method pausarBasura() { 
 		spawnActivos = false
@@ -37,23 +40,34 @@ object planificador {
 
 	method despausarBasura(){
 		spawnActivos = true
-		self.aparecer(botella)
-		self.aparecer(caja)
-		self.aparecer(papel)
+		objetos.forEach({ objeto=> self.programarAparicion(objeto)})
 	}
 
+	method programarAparicion(objeto){
+		if(!game.hasVisual(objeto) && !objetosProgramados.contains(objeto)){
+			objetosProgramados.add(objeto)
+			game.schedule(objeto.tiempoRegeneracion(), {
+				objetosProgramados.remove(objeto)
+				self.aparecer(objeto)
+			})
+		}
+	}
 	method aparecer(objeto) {
 		if(spawnActivos && !game.hasVisual(objeto)){
 			generador.crear(objeto)
 			game.schedule(objeto.tiempoDesaparicion(), {self.desaparecer(objeto)})
-		//game.schedule(azar.numeroEntre(objeto.tiempoDesaparicion(), 12000), {self.desaparecer(objeto)})
 		}
 	}
 
 	method desaparecer(objeto) {
 		if (game.hasVisual(objeto)) game.removeVisual(objeto) //Si ya lo habia recogido el jugador no se elimina (por si rompe)
 		if(spawnActivos) {
-			game.schedule(objeto.tiempoRegeneracion(), {self.aparecer(objeto)}) 
+			self.programarAparicion(objeto) 
 		}
+	}
+
+	method agregarBasura(){
+		objetos.add(new BotellaCara())
+		objetos.add(new CajaValiosa())
 	}
 }

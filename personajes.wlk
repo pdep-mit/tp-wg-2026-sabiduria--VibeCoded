@@ -12,9 +12,10 @@ object jugador inherits Personaje (position= game.center(), image= "player.png")
 	var property capacidadInventario = 4 // inicialmente solo puede llevar 4 bolsas de basura
 	var property dinero = 0
 	var property vidas = 3
+	var property danio = 1 
 
 
-	method movimiento(){
+	method controles(){
 		//Teclas para disparar
    		keyboard.right().onPressDo({ self.lanzarBasura(moverDer) })
 		keyboard.left().onPressDo({ self.lanzarBasura(moverIzq) })
@@ -79,8 +80,14 @@ object jugador inherits Personaje (position= game.center(), image= "player.png")
 	}
 
 	method recibirDanio(cantidad){
-		vidas = vidas - cantidad
-		//if (vidas <= 0) *****PERDER***** 
+		vidas = (vidas - cantidad).max(0)
+		if (vidas <= 0) {
+			self.morir()
+		}
+	}
+
+	method morir(){
+		game.say(self, "AHHHHHH!") //(?
 	}
 }
 

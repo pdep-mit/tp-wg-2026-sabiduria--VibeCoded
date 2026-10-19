@@ -81,13 +81,8 @@ object vendedor {
             }
         }
     }
-    /*
-    method hablar(){
-        if(!etapaFarmeo){
-            game.say(self, "")
-        }
-    }*/
     var property etapaFarmeo = true
+    var property prepararBoss = false
     var property puestosActivos = puestos
     method cambiarMejoras(){
         etapaFarmeo = false
@@ -98,7 +93,8 @@ object vendedor {
     }
 
     method iniciarBoss(){
-        if (!etapaFarmeo) {
+        if (!etapaFarmeo && !prepararBoss) {
+            prepararBoss = true
             game.schedule(5000, {
                 self.cerrarNegocio()
                 planificador.despausarBasura()

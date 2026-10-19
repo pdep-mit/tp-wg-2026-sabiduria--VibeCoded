@@ -1,3 +1,4 @@
+import personajes.*
 object cartelCash{
     var property text = "$ 0"
     const property textColor = "FFFFFF"
@@ -40,5 +41,24 @@ object contadorJefe{
             game.removeVisual(self)
         }
     }
-
 }
+object salud{
+    var property position = game.at(0,0)
+    method image() = "corazon" + jugador.vidas() + ".png"
+    
+}
+/*
+object vidas {
+    var property position = game.at(0,0)
+    method image() = "corazon4.png"
+}
+ object tentaculo{
+    method image() = "tentaculoOnda1.gif"
+     var property position = game.at(5,1)
+ }
+
+     
+ object tentaculo1{
+    var property position = game.at(10,1)
+    method image() = "tentaculoOnda2.gif"
+ }*/
