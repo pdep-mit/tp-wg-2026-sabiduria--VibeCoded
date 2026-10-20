@@ -55,5 +55,4 @@ object jefe{
         //Remover el timer de los ataques
         movimiento.techo(15) // vuelve a default
     }
-
 }

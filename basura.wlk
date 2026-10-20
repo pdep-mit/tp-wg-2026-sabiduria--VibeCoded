@@ -42,13 +42,13 @@ class Papel inherits Basura {
 }
 
 class BotellaCara inherits Basura {
-	override method image() = "papel.png"
+	override method image() = "botellaCara.png"
 	override method valor() = 75
 	override method espacio() = 1
 }
 
 class CajaValiosa inherits Basura {
-	override method image() = "papel.png"
+	override method image() = "cajaValiosa.png"
 	override method valor() = 75
 	override method espacio() = 1
 }

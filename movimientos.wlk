@@ -1,15 +1,17 @@
 import wollok.game.*
 object movimiento {
 	var property techo = 15
-
+	
     method mover(personaje, direccion) {
         const nuevaPos = direccion.siguiente(personaje.position())
+		const salirDelJefe = personaje.position().y() >= techo -1 && nuevaPos.y() < personaje.position().y()
         if (nuevaPos.x() >= 0 && nuevaPos.x() < game.width() - 1 &&
-			nuevaPos.y() >= 0 && nuevaPos.y() < techo - 1)
-		    personaje.position(nuevaPos)
-			personaje.caminar()
-			game.schedule(150, {personaje.quedarseQuieto()})
-	}	
+			nuevaPos.y() >= 0 && nuevaPos.y() < techo - 1 || salirDelJefe) {
+		    	personaje.position(nuevaPos)
+				personaje.caminar()
+				game.schedule(150, {personaje.quedarseQuieto()})
+			}
+	}
 }
 
 object moverIzq { 

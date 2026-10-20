@@ -67,7 +67,13 @@ object planificador {
 	}
 
 	method agregarBasura(){
-		objetos.add(new BotellaCara())
-		objetos.add(new CajaValiosa())
+		const nuevaBotella = new BotellaCara()
+		const nuevaCaja = new CajaValiosa()
+		objetos.add(nuevaBotella)
+		objetos.add(nuevaCaja)
+		if(spawnActivos){
+			self.programarAparicion(nuevaBotella)
+			self.programarAparicion(nuevaCaja)
+		}
 	}
 }

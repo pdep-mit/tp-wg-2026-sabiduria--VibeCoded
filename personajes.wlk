@@ -1,6 +1,6 @@
 import movimientos.*
 import basura.*
-import hud.*
+//import hud.*
 import proyectiles.*
 /*
 class Personaje {
@@ -45,10 +45,10 @@ object jugador {
 
 		// Para mover el jugador manteniendo las teclas. Cada 300 milisengundos se ejecuta la accion de movimiento
 
-		keyboard.a().whilePressedDo({ movimiento.mover(self, moverIzq	)}, 300)
-		keyboard.d().whilePressedDo({ movimiento.mover(self, moverDer	)}, 300)
-		keyboard.w().whilePressedDo({ movimiento.mover(self, moverArriba)}, 300)
-		keyboard.s().whilePressedDo({ movimiento.mover(self, moverAbajo	)}, 300)
+		keyboard.a().whilePressedDo({ movimiento.mover(self, moverIzq	)}, 250)
+		keyboard.d().whilePressedDo({ movimiento.mover(self, moverDer	)}, 250)
+		keyboard.w().whilePressedDo({ movimiento.mover(self, moverArriba)}, 250)
+		keyboard.s().whilePressedDo({ movimiento.mover(self, moverAbajo	)}, 250)
 		//keyboard.a().onPressDo({movimiento.mover(self,moverDiagonal)}) No sirve para nada(?
   	}
 
@@ -86,7 +86,7 @@ object jugador {
 				delayProyectil = true
 				const basuraTirar = items_recolectados.anyOne()
 				items_recolectados.remove(basuraTirar)
-				cartelInv.actualizar(self)
+				//cartelInv.actualizar(self)
 				const proyectil = new Proyectil(image=basuraTirar.image(), position=self.position())
 				game.addVisual(proyectil)
 				proyectil.disparar(direccion)

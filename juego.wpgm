@@ -27,12 +27,18 @@ program HowToTrash {
 	// game.addVisual(tentaculo1)
 	
 	planificador.despausarBasura()
-	game.addVisual(cartelInv) // agregar cuando se haya definido su posicion
-	game.addVisual(cartelCash) // agregar cuando se haya definido su posicion
+	game.addVisual(cartelInv)
+	//cartelInv.actualizar(jugador) // agregar cuando se haya definido su posicion
+	game.addVisual(cartelCash)
+	//cartelCash.actualizar(jugador) // agregar cuando se haya definido su posicion
 	game.addVisual(salud)
 	//game.addVisual(vidas)
 	game.addVisual(contadorJefe) // agregar cuando se haya definido su posicion
-
+	/*
+	cartelInv.actualizar(jugador)
+	cartelCash.actualizar(jugador)
+	salud.actualizar(jugador)
+	*/
 
 	//Mecánicas
 	//game.whenCollideDo(jugador, {item => jugador.recolectarItem(item)})
@@ -40,11 +46,17 @@ program HowToTrash {
 	jugador.interaccion()
 	vendedor.abrirNegocio()
 	// tick.start() // actualiza el contador hasta que aparece el jefe ( agregar luego )
-	game.whenCollideDo(jugador, {item => item.alColisionarCon(jugador)
-									cartelInv.actualizar(jugador) // para el contador de inventario
-									cartelCash.actualizar(jugador) // para el contador de dinero
-								})
+	game.whenCollideDo(jugador, {item => item.alColisionarCon(jugador)})
+									//cartelInv.actualizar(jugador) // para el contador de inventario
+									//cartelCash.actualizar(jugador) // para el contador de dinero
+								//})
+								//salud.actualizar(jugador)
+	
 
-
+	game.onTick(100, "actualizarHUD", {
+    cartelInv.actualizar(jugador)
+    cartelCash.actualizar(jugador)
+    salud.actualizar(jugador)
+	})
 	game.start()
 }
