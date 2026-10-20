@@ -4,6 +4,7 @@ import movimientos.*
 import basura.*
 //import hud.*
 import proyectiles.*
+import configs.*
 /*
 class Personaje {
 	var property position 
@@ -53,10 +54,8 @@ object jugador {
 		keyboard.s().whilePressedDo({ movimiento.mover(self, moverAbajo	)}, 250)
 
 		keyboard.r().onPressDo({
-			console.println("Reiniciando juego...")
 			config.reiniciar()
 		})
-		//keyboard.a().onPressDo({movimiento.mover(self,moverDiagonal)}) No sirve para nada(?
   	}
 
     method recolectarItem(item){
