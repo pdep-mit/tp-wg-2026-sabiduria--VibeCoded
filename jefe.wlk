@@ -53,7 +53,7 @@ object jefe{
         ataques.detenerAtaques()
         tick.stop() // detiene la ejecucion del tick de reubicacion
         movimiento.estadoInicial() // vuelve a default
-
+        planificador.pausarBasura()
         // CAMBIAR ESTA LINEA
         game.schedule(15000, {config.victoria()})
     }

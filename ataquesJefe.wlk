@@ -17,7 +17,7 @@ class Casilla {
 
 object ataques{
     method comenzar(){
-        game.onTick(6500, "timerAtaques", {self.elegirAtaque()})
+        game.onTick(5500, "timerAtaques", {self.elegirAtaque()})
     }
 
     method elegirAtaque(){
@@ -32,14 +32,14 @@ object ataques{
 }
 
 object ataqueRecto{
-    const tiempoAviso = 4000
+    const tiempoAviso = 2000
     const tiempoExplosion = 500
 
     //Supongamos que solo es horizontal
 
     method seleccionarCeldas(){
         //Como solo es horizontal ubica en columnas
-        const ySeleccionada = (0 .. movimiento.techo()-1).anyOne()
+        const ySeleccionada = (0 .. movimiento.techo()-2).anyOne()
         const filaDeCeldasSeleccionadas = (0 .. game.width() - 1).map({ coordenada => new Casilla(position = game.at(coordenada, ySeleccionada))})
         filaDeCeldasSeleccionadas.forEach({celda => game.addVisual(celda)})
 		game.schedule(tiempoAviso, {self.explotar(filaDeCeldasSeleccionadas, ySeleccionada)})
@@ -69,8 +69,8 @@ class Tentaculo{
     }
 }
 object ponerTentaculos {
-    var property cantTentaculos = 4
-    const property tiempoEnPantalla = 4000
+    var property cantTentaculos = 5
+    const property tiempoEnPantalla = 3000
     const tiempoAviso = 1500
     //const tiempoPausa = 8000
     //game.schedule(tiempoAviso, {self.aparecerTentaculos()})
@@ -104,7 +104,7 @@ object ponerTentaculos {
 
     method obtenerPosicion(){
         const largoDelTablero = (0 .. game.width() - 3)
-		const altoDelTablero = (0 .. movimiento.techo())
+		const altoDelTablero = (0 .. movimiento.techo()-2)
 
 		const x = largoDelTablero.anyOne() //Coordenada random en X
 	    const y = altoDelTablero.anyOne() //Coordenada random en Y

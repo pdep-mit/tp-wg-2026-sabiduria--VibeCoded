@@ -19,9 +19,10 @@ object gestorFondo{
     method terminarJuego(){
         planificador.pausarBasura()
         ataques.detenerAtaques()
+		/*
         game.allVisuals().forEach({
             visual => game.removeVisual(visual)
-        }) // no hacer clear()
+        })*/ // no hacer clear()
         self.actualizarFondo(pantallaDerrota)
         console.println("Juego terminado")
         

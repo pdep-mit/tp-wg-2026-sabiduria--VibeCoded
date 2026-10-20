@@ -23,11 +23,16 @@ object jugador {
 	var estaEnMovimiento = false
 	
 	method image(){
-		if (estaEnMovimiento) {
-			return imagenActual
+		if(estaVivo){
+			if(estaEnMovimiento){
+				return imagenActual
+			} else {
+				return "pjfrente.png"
+			}
 		} else {
-			return "pjfrente.png"
+			return imagenActual
 		}
+
 	}
 
 	method caminar(){
@@ -116,11 +121,13 @@ object jugador {
 			self.morir()
 		}
 	}
-
+	var property estaVivo = true
+	
 	method morir(){
+		estaVivo = false
+		movimiento.detener()
+		imagenActual = "muerte2.1.png"
 		game.say(self, "AHHHHHH!")
 		gestorFondo.terminarJuego()
 	}
 }
-
-
