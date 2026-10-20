@@ -19,13 +19,8 @@ object ataques{
     method comenzarAtaques(){
         game.onTick(5500, "timerAtaques", {self.hacerAtaques()})
     }
-<<<<<<< HEAD
-    
-    method elegirAtaque(){
-=======
 
     method hacerAtaques(){
->>>>>>> 1a06316b92d7f55678d44855951433a1092f2aa2
         //Bueno como hay uno solo llamo a ese
         ataqueRecto.seleccionarCeldas()
         ponerTentaculos.comenzarAtaque()
@@ -38,12 +33,7 @@ object ataques{
 
 object ataqueRecto{ //Vertical y Horizontal
     const tiempoAviso = 2000
-<<<<<<< HEAD
-    const tiempoExplosion = 500
-    //Supongamos que solo es horizontal
-=======
     const tiempoExplosion = 500 //NO se toca
->>>>>>> 1a06316b92d7f55678d44855951433a1092f2aa2
 
     method seleccionarCeldas(){
         const horizontal = [true, false].anyOne()
