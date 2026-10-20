@@ -76,4 +76,8 @@ object planificador {
 			self.programarAparicion(nuevaCaja)
 		}
 	}
+
+	method estadoInicial(){
+		objetos=[new Botella(), new Caja(), new Papel()]
+	}
 }

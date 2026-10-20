@@ -1,11 +1,13 @@
+import generador.*
+import movimientos.*
+import personajes.*
+
 /*
 ==Propuestas de ataques del jefe:
 -> Se ilumina toda una linea de celdas, despues de un tiempo se recibe daño si el jugador está parada en ellas
 -> Algun elemento que se mueva estilo juego de la viborita, movimiento random, si toca al jugador se pierde 1 vida
 -> Aparecen paredes u objetos que no permiten pararse en esa(s) celda(s), dificultando esquivar los otros ataques
 */
-import personajes.*
-import movimientos.*
 
 class Casilla {
 	var property position
@@ -23,6 +25,10 @@ object ataques{
         ataqueRecto.seleccionarCeldas()
         ponerTentaculos.comenzarAtaque()
     }
+
+    method detenerAtaques(){
+        game.removeTickEvent("timerAtaques")
+    }
 }
 
 object ataqueRecto{
@@ -33,7 +39,7 @@ object ataqueRecto{
 
     method seleccionarCeldas(){
         //Como solo es horizontal ubica en columnas
-        const ySeleccionada = (0 .. movimiento.techo()).anyOne()
+        const ySeleccionada = (0 .. movimiento.techo()-1).anyOne()
         const filaDeCeldasSeleccionadas = (0 .. game.width() - 1).map({ coordenada => new Casilla(position = game.at(coordenada, ySeleccionada))})
         filaDeCeldasSeleccionadas.forEach({celda => game.addVisual(celda)})
 		game.schedule(tiempoAviso, {self.explotar(filaDeCeldasSeleccionadas, ySeleccionada)})
@@ -57,7 +63,7 @@ class Tentaculo{
         if(!hizoDanio) {
             hizoDanio = true
             alguien.recibirDanio(1)
-            game.say(self, "Te hice daño")
+            game.say(alguien, "OUCH!")
         }
 
     }

@@ -10,7 +10,15 @@ object movimiento {
 		    	personaje.position(nuevaPos)
 				personaje.caminar()
 				game.schedule(150, {personaje.quedarseQuieto()})
-			}
+		} else if (personaje.position().y() >= techo ) // arregla bug de personaje quedandose atascado si se encontraba en el techo al momento de aparecer el boss
+			{personaje.position( 
+				game.at(personaje.position().x(), techo-2)
+			)
+		}
+	}
+
+	method estadoInicial(){
+		techo=15
 	}
 }
 

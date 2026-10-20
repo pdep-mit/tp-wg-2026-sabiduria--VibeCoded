@@ -27,15 +27,15 @@ TODO
 
 ## Controles
 
-**W** : moverse hacia arriba
-**A** : moverse hacia la izquierda
-**S** : moverse hacia abajo
+**W** : moverse hacia arriba\
+**A** : moverse hacia la izquierda\
+**S** : moverse hacia abajo\
 **D** : moverse hacia la derecha
 
-Flechas:
-**flecha-derecha** : lanzar basura hacia la derecha
-**flecha-izquierda** : lanzar basura hacia la izquierda
-**flecha-arriba** : lanzar basura hacia arriba
+Flechas:\
+**flecha-derecha** : lanzar basura hacia la derecha\
+**flecha-izquierda** : lanzar basura hacia la izquierda\
+**flecha-arriba** : lanzar basura hacia arriba\
 **flecha-abajo** : lanzar basura hacia abajo
 
 # Explicaciones

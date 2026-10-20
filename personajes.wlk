@@ -1,3 +1,5 @@
+import gestorFondo.*
+import vendedor.*
 import movimientos.*
 import basura.*
 //import hud.*
@@ -49,6 +51,11 @@ object jugador {
 		keyboard.d().whilePressedDo({ movimiento.mover(self, moverDer	)}, 250)
 		keyboard.w().whilePressedDo({ movimiento.mover(self, moverArriba)}, 250)
 		keyboard.s().whilePressedDo({ movimiento.mover(self, moverAbajo	)}, 250)
+
+		keyboard.r().onPressDo({
+			console.println("Reiniciando juego...")
+			config.reiniciar()
+		})
 		//keyboard.a().onPressDo({movimiento.mover(self,moverDiagonal)}) No sirve para nada(?
   	}
 
@@ -98,11 +105,10 @@ object jugador {
 	}
 
 	method interaccion(){
-	keyboard.m().onPressDo({game.say(self, "Tengo $" + self.dinero().toString())})
-	keyboard.i().onPressDo({
-			game.say(self, "Tengo " + items_recolectados.size().toString() + " items")
-		})
-	//keyboard.f().onPressDo({self.lanzarBasura()})
+		keyboard.m().onPressDo({game.say(self, "Tengo $" + self.dinero().toString())})
+		keyboard.i().onPressDo({
+				game.say(self, "Tengo " + items_recolectados.size().toString() + " items")
+			})
 	}
 
 	method recibirDanio(cantidad){
@@ -113,9 +119,9 @@ object jugador {
 	}
 
 	method morir(){
-		game.say(self, "AHHHHHH!") //(?
+		game.say(self, "AHHHHHH!")
+		gestorFondo.terminarJuego()
 	}
 }
 
-// TODO: la persona que lleva a la fase del jefe
-// TODO: el jefe
+
