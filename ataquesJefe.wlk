@@ -16,11 +16,11 @@ class Casilla {
 }
 
 object ataques{
-    method comenzar(){
-        game.onTick(5500, "timerAtaques", {self.elegirAtaque()})
+    method comenzarAtaques(){
+        game.onTick(5500, "timerAtaques", {self.hacerAtaques()})
     }
 
-    method elegirAtaque(){
+    method hacerAtaques(){
         //Bueno como hay uno solo llamo a ese
         ataqueRecto.seleccionarCeldas()
         ponerTentaculos.comenzarAtaque()
@@ -31,29 +31,37 @@ object ataques{
     }
 }
 
-object ataqueRecto{
+object ataqueRecto{ //Vertical y Horizontal
     const tiempoAviso = 2000
-    const tiempoExplosion = 500
-
-    //Supongamos que solo es horizontal
+    const tiempoExplosion = 500 //NO se toca
 
     method seleccionarCeldas(){
-        //Como solo es horizontal ubica en columnas
-        const ySeleccionada = (0 .. movimiento.techo()-2).anyOne()
-        const filaDeCeldasSeleccionadas = (0 .. game.width() - 1).map({ coordenada => new Casilla(position = game.at(coordenada, ySeleccionada))})
-        filaDeCeldasSeleccionadas.forEach({celda => game.addVisual(celda)})
-		game.schedule(tiempoAviso, {self.explotar(filaDeCeldasSeleccionadas, ySeleccionada)})
+        const horizontal = [true, false].anyOne()
+        const celdasAfectadas = if (horizontal) self.seleccionarFilaAfectada() else self.seleccionarColumnaAfectada()
+        celdasAfectadas.forEach({celda => game.addVisual(celda)})
+		game.schedule(tiempoAviso, {self.explotar(celdasAfectadas)})
     }
 
-    method explotar(celdas, fila){
+    method seleccionarFilaAfectada(){
+        const ySeleccionada = (0 .. movimiento.techo()-2).anyOne()
+        const filaDeCeldasSeleccionadas = (0 .. game.width() - 1).map({coordenada => new Casilla(position = game.at(coordenada, ySeleccionada))})
+        return filaDeCeldasSeleccionadas
+    }
+
+    method seleccionarColumnaAfectada(){
+        const xSeleccionada = (0 .. game.width() - 1).anyOne()
+        const columnaDeCeldasSeleccionadas = (0 .. game.height() - 1).map({coordenada => new Casilla(position = game.at(xSeleccionada, coordenada))})
+        return columnaDeCeldasSeleccionadas
+    }
+
+    method explotar(celdas){
 		celdas.forEach({ celda => celda.image("explosion.gif")})
-		const posicionJugador = jugador.position()
-		if (posicionJugador.y() == fila) jugador.recibirDanio(1)
+		if(celdas.any({celda => celda.position() == jugador.position()})) jugador.recibirDanio(1)
 		game.schedule(tiempoExplosion, { celdas.forEach({ celda => game.removeVisual(celda)})})
 	}
+
 }
 
-//object ataqueViborita inherits Ataque{}
 class Tentaculo{
     var property position
     var property hizoDanio = false
