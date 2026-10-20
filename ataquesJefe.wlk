@@ -19,7 +19,7 @@ object ataques{
     method comenzar(){
         game.onTick(5500, "timerAtaques", {self.elegirAtaque()})
     }
-
+    
     method elegirAtaque(){
         //Bueno como hay uno solo llamo a ese
         ataqueRecto.seleccionarCeldas()
@@ -34,7 +34,6 @@ object ataques{
 object ataqueRecto{
     const tiempoAviso = 2000
     const tiempoExplosion = 500
-
     //Supongamos que solo es horizontal
 
     method seleccionarCeldas(){
@@ -63,7 +62,7 @@ class Tentaculo{
         if(!hizoDanio) {
             hizoDanio = true
             alguien.recibirDanio(1)
-            game.say(alguien, "OUCH!")
+            //game.say(alguien, "OUCH!")
         }
 
     }

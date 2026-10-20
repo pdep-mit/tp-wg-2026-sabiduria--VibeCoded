@@ -22,18 +22,18 @@ object jugador {
 	const caminarAnimacion = ["pjcamina.png", "pjcamina1.png"]
 	var estaEnMovimiento = false
 	var property estaVivo = true
+	var property recibeDanio = false
 	
 	method image(){
-		if(estaVivo){
-			if(estaEnMovimiento){
-				return imagenActual
-			} else {
-				return "pjfrente.png"
-			}
+		if (!estaVivo){
+			return imagenActual //self.morir()
+		} else if (recibeDanio) {
+			return "pjdanio.png"
+		} else if (estaEnMovimiento){
+			return imagenActual // self.caminar()
 		} else {
-			return imagenActual
+			return "pjfrente.png" // self.morir()
 		}
-
 	}
 
 	method caminar(){
@@ -117,17 +117,22 @@ object jugador {
 	}
 
 	method recibirDanio(cantidad){
+		recibeDanio = true
 		vidas = (vidas - cantidad).max(0)
 		if (vidas <= 0) { //Posible implementación: cuando quede a 1 de vida, recibir daño le saca medio corazon
 			self.morir()
+		} else {
+			game.say(self, "OUCH!")
+			game.schedule(400, {
+				recibeDanio = false
+			})
 		}
 	}
-	
 	
 	method morir(){
 		estaVivo = false
 		movimiento.detener()
-		imagenActual = "muerte2.1.png"
+		imagenActual = "pjderrotado.png"
 		game.say(self, "AHHHHHH!")
 		gestorFondo.terminarJuego()
 	}

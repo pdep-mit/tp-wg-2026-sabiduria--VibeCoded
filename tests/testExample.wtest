@@ -1,8 +1,10 @@
+import movimientos.*
 import mejoras.*
 // Archivo de tests de referencia, borrar luego de desarrollar propios
 import personajes.*
 import negocioMejoras.*
 import basura.*
+import jefe.*
 
 describe "grupo de tests" {
 
@@ -49,4 +51,25 @@ describe "grupo de tests" {
     assert.equals(dineroEsperado, jugador.dinero())
   }
 
+  test "Player muere al recibir el danio de su vida máxima"{
+    jugador.recibirDanio(3)
+    assert.that(!jugador.estaVivo())
+  }
+
+  test "Al morir el player cambia su asset"{
+    jugador.morir()
+    assert.equals("pjderrotado.png", jugador.image())
+  }
+
+  test "Boss muere al recibir el danio de su vida máxima"{
+    const vidaInicial = jefe.vida()
+    jefe.recibirDanio(vidaInicial)
+    assert.that(jefe.vida()==0)
+  }
+  test "Player no puede disparar 2 basuras instantánamente"{
+    2.times({i => jugador.recolectarItem(new Botella())})
+    jugador.lanzarBasura(moverDer)
+    jugador.lanzarBasura(moverDer)
+    assert.equals(1, jugador.items_recolectados().size())
+  }
 }
