@@ -21,6 +21,7 @@ object jugador {
 	var property danio = 1 
 	const caminarAnimacion = ["pjcamina.png", "pjcamina1.png"]
 	var estaEnMovimiento = false
+	var property estaVivo = true
 	
 	method image(){
 		if(estaVivo){
@@ -121,7 +122,7 @@ object jugador {
 			self.morir()
 		}
 	}
-	var property estaVivo = true
+	
 	
 	method morir(){
 		estaVivo = false

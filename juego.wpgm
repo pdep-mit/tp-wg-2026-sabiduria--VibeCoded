@@ -19,6 +19,7 @@ program HowToTrash {
 
 	//Agregar Visuales
 	gestorFondo.desplegarFondo()
+	game.addVisual(jugador)
 	game.schedule(tiempoDeAparicionDeBoss, {
 		planificador.pausarBasura()
 		vendedor.cambiarMejoras()
