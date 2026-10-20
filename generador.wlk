@@ -78,6 +78,11 @@ object planificador {
 	}
 
 	method estadoInicial(){
-		objetos=[new Botella(), new Caja(), new Papel()]
+		// objetos=[new Botella(), new Caja(), new Papel()]
+		if(objetos.size() > 3){
+			objetos.remove( objetos.last())
+			objetos.remove(objetos.last())
+		}
+		objetosProgramados = []
 	}
 }

@@ -19,7 +19,7 @@ object negocioMejoras{
 
     method valorItems(persona) = persona.items_recolectados().sum({ item => item.valor() * bonus })
 
-    method reiniciar(){
+    method estadoInicial(){
         bonus = 1
     }
 }

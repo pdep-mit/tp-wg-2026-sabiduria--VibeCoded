@@ -102,4 +102,12 @@ object vendedor {
             })
         }
     }
+
+    method estadoInicial(){
+        prepararBoss = false
+        etapaFarmeo = true
+        vendioHaceUnMomento = false
+        puestosActivos = puestos
+        self.abrirNegocio()
+    }
 }
