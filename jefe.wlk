@@ -32,7 +32,7 @@ object jefe{
             tick.start() // empieza el tick de reubicacion
             movimiento.techo(self.position().y() - 2)// Por ahora cuando aparece el jefe, el jugador solo va a poder acercarse a 2 celdas de distancia del jefe
             game.addVisual(self)
-            ataques.comenzar()
+            ataques.comenzarAtaques()
         }
 	}
 
