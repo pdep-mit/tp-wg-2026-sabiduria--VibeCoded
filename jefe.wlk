@@ -50,14 +50,15 @@ object jefe{
         if (vida <= 0 && estaVivo) {self.morir() estaVivo=false}
     }
     
-    method morir(){
+    method morir() {
         ataques.detenerAtaques()
-        tick.stop() // detiene la ejecucion del tick de reubicacion
-        movimiento.estadoInicial() // vuelve a default
+        tick.stop()
+        movimiento.estadoInicial()
         planificador.pausarBasura()
-        game.schedule(5000, {game.removeVisual(self)})
-        // CAMBIAR ESTA LINEA de abajo
-        config.victoria()
+        game.schedule(1000, {
+            if (game.hasVisual(self)) game.removeVisual(self)
+            config.victoria()
+        })
     }
 
     method estadoInicial(){
@@ -65,4 +66,6 @@ object jefe{
         estaVivo = true
         tick.stop()
     }
+
+    
 }
