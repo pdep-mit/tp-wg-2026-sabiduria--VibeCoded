@@ -23,11 +23,22 @@ Recuerden que para cada checkpoint hay [expectativas mínimas](https://docs.goog
 
 ## Objetivo
 
-TODO
+El Jefe de recolección de basura no esta muy contento con tu desempeño del último tiempo y ha dado la orden de borrarte de la empresa. Tu objetivo es recolectar la mayor cantidad de basura antes de que llegue a eliminarte. Pero no vas a estar solo, vas a tener a tu vendedor de confianza que te va a acompañar. Acercate a él con la basura que recolectes para comprar mejoras, pero no malgastes en mejoras que no te sirvan para la lucha.\
+**Mucha suerte!**\
+Los amigos del vendedor. 
 
 ## Controles
 
-TODO
+**W** : moverse hacia arriba\
+**A** : moverse hacia la izquierda\
+**S** : moverse hacia abajo\
+**D** : moverse hacia la derecha
+
+Flechas:\
+**flecha-derecha** : lanzar basura hacia la derecha\
+**flecha-izquierda** : lanzar basura hacia la izquierda\
+**flecha-arriba** : lanzar basura hacia arriba\
+**flecha-abajo** : lanzar basura hacia abajo
 
 # Explicaciones
 

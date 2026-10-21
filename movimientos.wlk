@@ -1,11 +1,30 @@
 import wollok.game.*
 object movimiento {
+	var property techo = 15
+	var property sePuedeMover = true
     method mover(personaje, direccion) {
         const nuevaPos = direccion.siguiente(personaje.position())
+		const salirDelJefe = personaje.position().y() >= techo -1 && nuevaPos.y() < personaje.position().y()
         if (nuevaPos.x() >= 0 && nuevaPos.x() < game.width() - 1 &&
-			nuevaPos.y() >= 0 && nuevaPos.y() < game.height() - 1)
-		    personaje.position(nuevaPos)
-	}	
+			nuevaPos.y() >= 0 && nuevaPos.y() < techo - 1 && sePuedeMover || salirDelJefe) {
+		    	personaje.position(nuevaPos)
+				personaje.caminar()
+				game.schedule(150, {personaje.quedarseQuieto()})
+		} else if (personaje.position().y() >= techo ) // arregla bug de personaje quedandose atascado si se encontraba en el techo al momento de aparecer el boss
+			{personaje.position( 
+				game.at(personaje.position().x(), techo-2)
+			)
+		}
+	}
+
+	method detener(){
+		sePuedeMover = false
+	}
+
+	method estadoInicial(){
+		techo=15
+		sePuedeMover = true
+	}
 }
 
 object moverIzq { 

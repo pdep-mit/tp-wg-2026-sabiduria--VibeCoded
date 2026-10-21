@@ -1,8 +1,10 @@
+import movimientos.*
 import mejoras.*
 // Archivo de tests de referencia, borrar luego de desarrollar propios
 import personajes.*
 import negocioMejoras.*
 import basura.*
+import jefe.*
 
 describe "grupo de tests" {
 
@@ -12,34 +14,34 @@ describe "grupo de tests" {
 
   test "Player agarra una basura al colisionarla" {
     const invInicial = jugador.items_recolectados().size()
-    jugador.recolectarItem(botella)
+    jugador.recolectarItem(new Botella())
     assert.equals(invInicial+1, jugador.items_recolectados().size())
   }
 
   test "Player se queda sin espacio cuando llega al máximo de su inventario" {
     const capacidadIncial = jugador.capacidadInventario()
-    capacidadIncial.times({i=> jugador.recolectarItem(botella)})
+    capacidadIncial.times({i=> jugador.recolectarItem(new Botella())})
     assert.that(jugador.sinInventario())
   }
 
   test "Player vende items recolectador"{
-    // jugador.recolectarItem(botella)
-    4.times({i=>jugador.recolectarItem(botella)})
+    // jugador.recolectarItem(new Botella())
+    4.times({i=>jugador.recolectarItem(new Botella())})
     negocioMejoras.venderBasura(jugador)
     assert.equals(jugador.items_recolectados().size(), 0 )
   }
 
   test "Player vende items recolectador y gana dinero"{
     const cantidad = 4
-    const dineroEsperado = cantidad * botella.valor()
-    cantidad.times({i=> jugador.recolectarItem(botella)})
+    const dineroEsperado = cantidad * new Botella().valor()
+    cantidad.times({i=> jugador.recolectarItem(new Botella())})
     negocioMejoras.venderBasura(jugador)
     assert.equals(dineroEsperado, jugador.dinero())
 
   }
 
   test "Player vende items con la mejora de mayorValor"{
-    4.times({i => jugador.recolectarItem(botella)})
+    4.times({i => jugador.recolectarItem(new Botella())})
     const valorBase = jugador.items_recolectados().sum({item => item.valor()})
     jugador.dinero(1000) // para que pueda comprar la mejora
     negocioMejoras.comprarMejora(jugador, mayorValor)
@@ -49,4 +51,25 @@ describe "grupo de tests" {
     assert.equals(dineroEsperado, jugador.dinero())
   }
 
+  test "Player muere al recibir el danio de su vida máxima"{
+    jugador.recibirDanio(3)
+    assert.that(!jugador.estaVivo())
+  }
+
+  test "Al morir el player cambia su asset"{
+    jugador.morir()
+    assert.equals("pjderrotado.png", jugador.image())
+  }
+
+  test "Boss muere al recibir el danio de su vida máxima"{
+    const vidaInicial = jefe.vida()
+    jefe.recibirDanio(vidaInicial)
+    assert.that(jefe.vida()==0)
+  }
+  test "Player no puede disparar 2 basuras instantánamente"{
+    2.times({i => jugador.recolectarItem(new Botella())})
+    jugador.lanzarBasura(moverDer)
+    jugador.lanzarBasura(moverDer)
+    assert.equals(1, jugador.items_recolectados().size())
+  }
 }
