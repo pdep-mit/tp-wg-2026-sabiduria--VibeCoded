@@ -23,6 +23,7 @@ object movimiento {
 
 	method estadoInicial(){
 		techo=15
+		sePuedeMover = true
 	}
 }
 

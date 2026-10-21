@@ -134,6 +134,6 @@ object jugador {
 		movimiento.detener()
 		imagenActual = "pjderrotado.png"
 		game.say(self, "AHHHHHH!")
-		gestorFondo.terminarJuego()
+		pantallaDerrota.aplicarFondo()
 	}
 }

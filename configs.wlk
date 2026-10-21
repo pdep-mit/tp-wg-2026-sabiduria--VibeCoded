@@ -11,13 +11,17 @@ object config{
     const property tiempoDeAparicionDeBoss = 22000
 
     method victoria()
-        /* TODO */
+        /* TODO
+        CAMBIAR ESTO */
     {
         game.say(protagonista, 'GANE')
+        game.schedule(10000,{pantallaVictoria.aplicarFondo()})
     }
 
     method reiniciar(){
-        if(game.boardGround() != pantallaJuego.image()){
+        if(game.boardGround() != pantallaJuego.image())
+        // Por ahora solo se ejecuta cuando el fondo no es fondo3.jpg
+        {
             gestorFondo.actualizarFondo(pantallaJuego)
             self.resetJugador(protagonista)
             self.resetOtros()
@@ -25,18 +29,16 @@ object config{
             planificador.estadoInicial()
             self.visualizarObjetos()
             self.iniciarEventos()
-        } else {
-            console.println("No se reinicia el juego porque aun no termino")
         }
         
     }
 
     method visualizarObjetos(){
-        game.addVisual(jugador)
-        game.addVisual(salud)
-        game.addVisual(cartelCash)
-        game.addVisual(cartelInv)
-        game.addVisual(contadorJefe)
+        self.mostrarObjetoSi(jugador)
+        self.mostrarObjetoSi(salud)
+        self.mostrarObjetoSi(cartelCash)
+        self.mostrarObjetoSi(cartelInv)
+        self.mostrarObjetoSi(contadorJefe)
         planificador.despausarBasura()
         vendedor.estadoInicial()
     }
@@ -46,6 +48,8 @@ object config{
         personaje.items_recolectados().clear()
         personaje.dinero(0)
         personaje.capacidadInventario(4)
+        personaje.estaVivo(true)
+        personaje.recibeDanio(false)
     }
 
     method resetOtros()
@@ -64,6 +68,12 @@ object config{
             planificador.pausarBasura()
             vendedor.cambiarMejoras()
 	    })
+    }
+
+    method mostrarObjetoSi(objeto){
+        if(not game.hasVisual(objeto)){
+            game.addVisual(objeto)
+        }
     }
 
 

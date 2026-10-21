@@ -22,10 +22,11 @@ El jugador no puede tocar al jefe (o si, pero seria muy facil golpearlo con la b
 object jefe{
     const hitBox = 5 //El "ancho" del jefe, es un sprite mas bien alargado para que el jugador tenga que alinearse en la misma columna para pegarle  
     var property vida = 10
-    method image() = if( vida>=0 ) "jefe.gif" else "jefeDerrotado.gif"
+    method image() = if( vida>0 ) "jefe.gif" else "jefeDerrotado.gif"
     var property position = game.at(5, game.height() - 2)
+    var estaVivo = true
     const tiempoDeReubicacion = 10000 // tiempo para reubicar el boss
-    var tick = game.tick(tiempoDeReubicacion, {self.reubicar()}, true) // este tick se encarga de reubicar al jefe cada tiempoDeReubicacion
+    const tick = game.tick(tiempoDeReubicacion, {self.reubicar()}, true) // este tick se encarga de reubicar al jefe cada tiempoDeReubicacion
 
     method aparecer() {
         if(not game.hasVisual(self)){
@@ -46,7 +47,7 @@ object jefe{
     
     method recibirDanio(cantidad){
         vida = vida - cantidad
-        if (vida <= 0) self.morir()
+        if (vida <= 0 && estaVivo) {self.morir() estaVivo=false}
     }
     
     method morir(){
@@ -54,12 +55,14 @@ object jefe{
         tick.stop() // detiene la ejecucion del tick de reubicacion
         movimiento.estadoInicial() // vuelve a default
         planificador.pausarBasura()
-        // CAMBIAR ESTA LINEA
-        game.schedule(15000, {config.victoria()})
+        game.schedule(5000, {game.removeVisual(self)})
+        // CAMBIAR ESTA LINEA de abajo
+        config.victoria()
     }
 
     method estadoInicial(){
         vida = 10
+        estaVivo = true
         tick.stop()
     }
 }
