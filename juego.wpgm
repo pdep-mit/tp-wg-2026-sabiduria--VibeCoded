@@ -9,7 +9,6 @@ import gestorFondo.*
 import configs.*
 
 program HowToTrash {
-	// const tick = game.tick(1000, {contadorJefe.actualizar(jugador)}, true) // para el contador de tiempo restante antes que aparezca el jefe ( agregar luego )
 	const tiempoDeAparicionDeBoss = config.tiempoDeAparicionDeBoss()
 	contadorJefe.timer(tiempoDeAparicionDeBoss/1000)
 	game.title("Grupo: Vibecoded | How To Trash")
@@ -17,7 +16,7 @@ program HowToTrash {
 	game.width(15)
 	game.cellSize(35)
 
-	//Agregar Visuales
+	// Agregar Visuales
 	gestorFondo.desplegarFondo()
 	game.addVisual(jugador)
 	game.schedule(tiempoDeAparicionDeBoss, {
@@ -25,9 +24,6 @@ program HowToTrash {
 		vendedor.cambiarMejoras()
 	})
 
-	// game.addVisual(tentaculo)
-	// game.addVisual(tentaculo1)
-	
 	planificador.despausarBasura()
 	game.addVisual(cartelInv)
 	game.addVisual(cartelCash)
@@ -35,18 +31,20 @@ program HowToTrash {
 	game.addVisual(contadorJefe)
 	contadorJefe.comenzarContador()
 
-
-	//Mecánicas
+	// Mecánicas y Controles
 	jugador.controles()
 	jugador.interaccion()
 	vendedor.abrirNegocio()
 	game.whenCollideDo(jugador, {item => item.alColisionarCon(jugador)})
 	
+	// Tecla para reiniciar (solo surtirá efecto si el juego ya terminó)
+	keyboard.r().onPressDo({ config.reiniciar() })
 
 	game.onTick(100, "actualizarHUD", {
-    cartelInv.actualizar(jugador)
-    cartelCash.actualizar(jugador)
-    salud.actualizar(jugador)
+		cartelInv.actualizar(jugador)
+		cartelCash.actualizar(jugador)
+		salud.actualizar(jugador)
 	})
+	
 	game.start()
 }

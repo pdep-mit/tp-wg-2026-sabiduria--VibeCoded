@@ -116,24 +116,19 @@ object jugador {
 			})
 	}
 
-	method recibirDanio(cantidad){
-		recibeDanio = true
-		vidas = (vidas - cantidad).max(0)
-		if (vidas <= 0) { //Posible implementación: cuando quede a 1 de vida, recibir daño le saca medio corazon
-			self.morir()
-		} else {
-			game.say(self, "OUCH!")
-			game.schedule(400, {
-				recibeDanio = false
-			})
-		}
+	method recibirDanio(cantidad) {
+    	vidas = (vidas - cantidad).max(0)
+    	if (vidas == 0 && estaVivo) {
+        	estaVivo = false
+        	config.derrota()
+    	}
 	}
 	
 	method morir(){
-		estaVivo = false
-		movimiento.detener()
-		imagenActual = "pjderrotado.png"
-		game.say(self, "AHHHHHH!")
-		pantallaDerrota.aplicarFondo()
-	}
+    	estaVivo = false
+    	movimiento.detener()
+    	imagenActual = "pjderrotado.png"
+    	game.say(self, "AHHHHHH!")
+    	config.derrota() // Llama centralizadamente a la derrota
+}
 }
