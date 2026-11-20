@@ -10,6 +10,7 @@ class Basura{
 	method image()
 	method valor()
 	method espacio()
+	method danio() = 1 //Ahora la basura se encarga de decir cuanto daño hace, por default es 1.
 
 	method spawn(){
 		generador.crear(self)
@@ -27,12 +28,14 @@ class Botella inherits Basura {
 	override method image() = "botella.png"
 	override method valor() = 50
 	override method espacio() = 1
+	override method danio() = super() + 1 //Hace mas daño por ser de vidrio
 }
 
 class Caja inherits Basura {
 	override method image() = "caja.png"
 	override method valor() = 50
 	override method espacio() = 2
+	override method danio() = super() + 4 //Por ser mas grande (y ocupar el equivalente a 2 botellas por ejemplo)
 }
 
 class Papel inherits Basura {
@@ -41,14 +44,15 @@ class Papel inherits Basura {
 	override method espacio() = 1
 }
 
-class BotellaCara inherits Basura {
+class BotellaCara inherits Botella {
 	override method image() = "botellaCara.png"
 	override method valor() = 75
-	override method espacio() = 1
+	override method danio() = super() * 2 //multiplicador por ser cara
 }
 
 class CajaValiosa inherits Basura {
 	override method image() = "cajaValiosa.png"
 	override method valor() = 75
 	override method espacio() = 1
+	override method danio() = super() * 2
 }

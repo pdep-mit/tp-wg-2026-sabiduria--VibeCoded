@@ -18,7 +18,6 @@ object jugador {
 	var property capacidadInventario = 4 // inicialmente solo puede llevar 4 bolsas de basura
 	var property dinero = 0
 	var property vidas = 3
-	var property danio = 1 
 	const caminarAnimacion = ["pjcamina.png", "pjcamina1.png"]
 	var estaEnMovimiento = false
 	var property estaVivo = true
@@ -52,7 +51,7 @@ object jugador {
 		keyboard.up().onPressDo({ self.lanzarBasura(moverArriba) })
 		keyboard.down().onPressDo({ self.lanzarBasura(moverAbajo) })
 
-		// Para mover el jugador manteniendo las teclas. Cada 300 milisengundos se ejecuta la accion de movimiento
+		//Para mover el jugador manteniendo las teclas. Cada 300 milisengundos se ejecuta la accion de movimiento
 
 		keyboard.a().whilePressedDo({ movimiento.mover(self, moverIzq	)}, 250)
 		keyboard.d().whilePressedDo({ movimiento.mover(self, moverDer	)}, 250)
@@ -99,7 +98,7 @@ object jugador {
 				const basuraTirar = items_recolectados.anyOne()
 				items_recolectados.remove(basuraTirar)
 				//cartelInv.actualizar(self)
-				const proyectil = new Proyectil(image=basuraTirar.image(), position=self.position())
+				const proyectil = new Proyectil(basura=basuraTirar, position=self.position())
 				game.addVisual(proyectil)
 				proyectil.disparar(direccion)
 				game.schedule(delay, {delayProyectil = false})

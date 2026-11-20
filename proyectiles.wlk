@@ -1,9 +1,10 @@
 import jefe.*
 import personajes.*
 class Proyectil{ // clase de TESTING -> funciona
-    var property image
+    const property basura //Con esto el proyectil conoce la basura arrojada (Y cumplimos composicion)
     var property position
-	//const property danio = 1
+	method image() = basura.image()
+	method danio() = basura.danio() //la basura es la que se encarga de decir cuanto daño hace
 	
 	/* Se activa cuando el personaje tira un proyectil */
 	method alColisionarCon(alguien){
@@ -30,7 +31,7 @@ class Proyectil{ // clase de TESTING -> funciona
 		const siguientePos = direccion.siguiente(self.position())
 
 		if (jefe.esGolpeadoEn(siguientePos)) {
-			jefe.recibirDanio(jugador.danio())
+			jefe.recibirDanio(self.danio())
 			game.removeVisual(self)
 		} else 
 		if (siguientePos.x() >=-2 && siguientePos.x() < game.width()+2 &&
