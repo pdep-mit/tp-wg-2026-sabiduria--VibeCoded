@@ -22,6 +22,9 @@ object jugador {
 	var estaEnMovimiento = false
 	var property estaVivo = true
 	var property recibeDanio = false
+
+
+	var property danioBonus = 0
 	
 	method image(){
 		if (!estaVivo){
@@ -98,7 +101,7 @@ object jugador {
 				const basuraTirar = items_recolectados.anyOne()
 				items_recolectados.remove(basuraTirar)
 				//cartelInv.actualizar(self)
-				const proyectil = new Proyectil(basura=basuraTirar, position=self.position())
+				const proyectil = new Proyectil(basura=basuraTirar, position=self.position(), quienDispara=self)
 				game.addVisual(proyectil)
 				proyectil.disparar(direccion)
 				game.schedule(delay, {delayProyectil = false})

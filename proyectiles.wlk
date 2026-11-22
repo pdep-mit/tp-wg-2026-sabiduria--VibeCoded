@@ -1,36 +1,37 @@
 import jefe.*
 import personajes.*
-class Proyectil{ // clase de TESTING -> funciona
+class Proyectil{
     const property basura //Con esto el proyectil conoce la basura arrojada (Y cumplimos composicion)
     var property position
 	method image() = basura.image()
-	method danio() = basura.danio() //la basura es la que se encarga de decir cuanto daño hace
-	
-	/* Se activa cuando el personaje tira un proyectil */
+	var property quienDispara // para poder aplicar la mejora de masDanio
+	method danio() = basura.danio() + quienDispara.danioBonus() //la basura es la que se encarga de decir cuanto daño hace
+	//Se activa cuando el personaje tira un proyectil 
 	method alColisionarCon(alguien){
 		return
 	} 
-/*
-	method dispararDer(){
-		if(self.position().x()+1 != game.width() -1 && game.hasVisual(self) ){
-			game.schedule(500, {
-				if(self.position().x()+1 != game.width() - 1){
-					self.position( self.position().right(1) )
-				 	self.dispararDer()
-				} else {
-						return
-					}
-				}
-			)
-		} else {
-			game.removeVisual(self)
-		}
-	}*/
+
+	// method dispararDer(){
+	// 	if(self.position().x()+1 != game.width() -1 && game.hasVisual(self) ){
+	// 		game.schedule(500, {
+	// 			if(self.position().x()+1 != game.width() - 1){
+	// 				self.position( self.position().right(1) )
+	// 			 	self.dispararDer()
+	// 			} else {
+	// 					return
+	// 				}
+	// 			}
+	// 		)
+	// 	} else {
+	// 		game.removeVisual(self)
+	// 	}
+	// }
 
 	method disparar(direccion){
 		const siguientePos = direccion.siguiente(self.position())
 
 		if (jefe.esGolpeadoEn(siguientePos)) {
+			console.println(self.danio())
 			jefe.recibirDanio(self.danio())
 			game.removeVisual(self)
 		} else 

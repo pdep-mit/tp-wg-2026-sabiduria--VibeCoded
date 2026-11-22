@@ -48,7 +48,8 @@ object masDanio inherits Ventaja(
     precio = 250,
     descripcion = "Aumenta el daño del personaje"){
     override method ventaja(persona){
-        persona.danio((persona.danio() + 0.5))
+        // persona.danio((persona.danio() + 0.5))
+        persona.danioBonus(1.5)
     }
 }
 
