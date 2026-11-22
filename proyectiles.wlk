@@ -31,7 +31,6 @@ class Proyectil{
 		const siguientePos = direccion.siguiente(self.position())
 
 		if (jefe.esGolpeadoEn(siguientePos)) {
-			console.println(self.danio())
 			jefe.recibirDanio(self.danio())
 			game.removeVisual(self)
 		} else 

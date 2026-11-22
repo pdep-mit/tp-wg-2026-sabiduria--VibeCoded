@@ -18,7 +18,7 @@ program HowToTrash {
 
 	// Agregar Visuales
 	gestorFondo.desplegarFondo()
-	config.iniciarEventos()
+	// config.iniciarEventos()
 	// Mecánicas y Controles
 	jugador.controles()
 	jugador.interaccion()

@@ -28,7 +28,9 @@ object config {
 
     method reiniciar() {
         // Solo permite reiniciar con 'R' si se está en la pantalla de derrota o victoria
-        if (game.boardGround() == pantallaDerrota.image() || game.boardGround() == pantallaVictoria.image()) {
+        if (game.boardGround() == pantallaDerrota.image() || 
+                game.boardGround() == pantallaVictoria.image() || 
+                game.boardGround() == pantallaInicial.image() ) {
             gestorFondo.actualizarFondo(pantallaJuego)
             self.resetJugador(protagonista)
             self.resetOtros()
