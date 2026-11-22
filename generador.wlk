@@ -31,7 +31,8 @@ object generador{
 
 object planificador {
 	var property objetos = [new Botella(), new Caja(), new Papel()]
-	var property objetosProgramados = [] 
+	var property objetosProgramados = []
+	var planificacionActual = 0
 
 	var property spawnActivos = true
 	method pausarBasura() { 
@@ -44,18 +45,23 @@ object planificador {
 	}
 
 	method programarAparicion(objeto){
+		const idPartida = planificacionActual
 		if(!game.hasVisual(objeto) && !objetosProgramados.contains(objeto)){
 			objetosProgramados.add(objeto)
 			game.schedule(objeto.tiempoRegeneracion(), {
+				if(idPartida == planificacionActual)
 				objetosProgramados.remove(objeto)
-				self.aparecer(objeto)
+				self.aparecer(objeto, idPartida)
 			})
 		}
 	}
-	method aparecer(objeto) {
-		if(spawnActivos && !game.hasVisual(objeto)){
+	method aparecer(objeto, idPartida) {
+		if(idPartida == planificacionActual && spawnActivos && !game.hasVisual(objeto)){
 			generador.crear(objeto)
-			game.schedule(objeto.tiempoDesaparicion(), {self.desaparecer(objeto)})
+			game.schedule(objeto.tiempoDesaparicion(), {
+				if(idPartida == planificacionActual) {
+				self.desaparecer(objeto)}
+				})
 		}
 	}
 
@@ -78,11 +84,15 @@ object planificador {
 	}
 
 	method estadoInicial(){
-		// objetos=[new Botella(), new Caja(), new Papel()]
+		objetos=[new Botella(), new Caja(), new Papel()]
+		objetosProgramados = []
+		planificacionActual += 1
+		/*
 		if(objetos.size() > 3){
 			objetos.remove( objetos.last())
 			objetos.remove(objetos.last())
 		}
 		objetosProgramados = []
+		*/
 	}
 }

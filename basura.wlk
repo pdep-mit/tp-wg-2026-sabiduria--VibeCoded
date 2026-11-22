@@ -5,7 +5,7 @@ import personajes.*
 class Basura{
 	var property position = game.at(0, 0) 
 	//const property tiempoRegeneracion = 3000 // en ms
-	method tiempoRegeneracion() = azar.numeroEntre(3000, 6500)
+	method tiempoRegeneracion() = azar.numeroEntre(2500, 6500)
 	const property tiempoDesaparicion = 6500 // en ms
 	method image()
 	method valor()

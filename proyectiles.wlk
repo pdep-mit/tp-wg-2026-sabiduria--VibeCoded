@@ -5,7 +5,7 @@ class Proyectil{
     var property position
 	method image() = basura.image()
 	var property quienDispara // para poder aplicar la mejora de masDanio
-	method danio() = basura.danio() + quienDispara.danioBonus() //la basura es la que se encarga de decir cuanto daño hace
+	method danio() = basura.danio() + quienDispara.danioBonus() //la basura es la que se encarga de decir cuanto daño hace //jugador.danio()
 	//Se activa cuando el personaje tira un proyectil 
 	method alColisionarCon(alguien){
 		return

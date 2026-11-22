@@ -10,7 +10,7 @@ import ataquesJefe.* // AÑADIR ESTE IMPORT
 
 object config {
     const protagonista = jugador
-    const property tiempoDeAparicionDeBoss = 22000
+    const property tiempoDeAparicionDeBoss = 60000
 
     method victoria() {
         planificador.pausarBasura()
@@ -45,8 +45,6 @@ object config {
         self.mostrarObjetoSi(cartelCash)
         self.mostrarObjetoSi(cartelInv)
         self.mostrarObjetoSi(contadorJefe)
-        planificador.despausarBasura()
-        vendedor.estadoInicial()
     }
 
     method resetJugador(personaje) {
@@ -65,15 +63,13 @@ object config {
         jefe.estadoInicial()
         contadorJefe.timer(tiempoDeAparicionDeBoss / 1000)
     }
-
     method iniciarEventos() {
         contadorJefe.comenzarContador()
-        game.schedule(tiempoDeAparicionDeBoss, {
-            planificador.pausarBasura()
-            vendedor.cambiarMejoras()
-        })
+        self.visualizarObjetos()
+        vendedor.estadoInicial()
+        planificador.despausarBasura()
     }
-
+    
     method mostrarObjetoSi(objeto) {
         if (not game.hasVisual(objeto)) {
             game.addVisual(objeto)

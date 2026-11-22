@@ -18,23 +18,11 @@ program HowToTrash {
 
 	// Agregar Visuales
 	gestorFondo.desplegarFondo()
-	game.addVisual(jugador)
-	game.schedule(tiempoDeAparicionDeBoss, {
-		planificador.pausarBasura()
-		vendedor.cambiarMejoras()
-	})
-
-	planificador.despausarBasura()
-	game.addVisual(cartelInv)
-	game.addVisual(cartelCash)
-	game.addVisual(salud)
-	game.addVisual(contadorJefe)
-	contadorJefe.comenzarContador()
-
+	config.iniciarEventos()
 	// Mecánicas y Controles
 	jugador.controles()
 	jugador.interaccion()
-	vendedor.abrirNegocio()
+
 	game.whenCollideDo(jugador, {item => item.alColisionarCon(jugador)})
 	
 	// Tecla para reiniciar (solo surtirá efecto si el juego ya terminó)
