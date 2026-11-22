@@ -50,7 +50,7 @@ class BotellaCara inherits Botella {
 	override method danio() = super() * 2 //multiplicador por ser cara
 }
 
-class CajaValiosa inherits Basura {
+class CajaValiosa inherits Caja {
 	override method image() = "cajaValiosa.png"
 	override method valor() = 75
 	override method espacio() = 1
