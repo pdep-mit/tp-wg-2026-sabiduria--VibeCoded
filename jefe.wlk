@@ -62,7 +62,7 @@ object jefe{
     }
 
     method estadoInicial(){
-        vida = 10
+        vida = 15
         estaVivo = true
         tick.stop()
     }
