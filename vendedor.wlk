@@ -127,11 +127,11 @@ object etapaPreparacion{
     }
 
     var leHabloHaceUnMomento = false
-    /*
-    method resetear(){
-        leHabloHaceUnMomento = false
-    }
-    */
+    
+    // method resetear(){
+    //     leHabloHaceUnMomento = false
+    // }
+    
     method noTieneBasura(jugador){
         if(!leHabloHaceUnMomento){
             game.schedule(2000, {leHabloHaceUnMomento = true})

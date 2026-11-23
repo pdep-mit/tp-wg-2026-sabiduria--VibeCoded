@@ -21,7 +21,7 @@ El jugador no puede tocar al jefe (o si, pero seria muy facil golpearlo con la b
 
 object jefe{
     const hitBox = 5 //El "ancho" del jefe, es un sprite mas bien alargado para que el jugador tenga que alinearse en la misma columna para pegarle  
-    var property vida = 15
+    var property vida = 50
     method image() = if( vida>0 ) "jefe.gif" else "jefeDerrotado.gif"
     var property position = game.at(5, game.height() - 2)
     var estaVivo = true
@@ -62,7 +62,7 @@ object jefe{
     }
 
     method estadoInicial(){
-        vida = 15
+        vida = 50
         estaVivo = true
         tick.stop()
     }
