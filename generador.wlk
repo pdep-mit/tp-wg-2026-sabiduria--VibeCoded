@@ -30,7 +30,9 @@ object generador{
 }
 
 object planificador {
-	var property objetos = [new Botella(), new Caja(), new Papel()]
+	var property objetos = [new Botella(), 
+							new Caja(),
+							new Papel()]
 	var property objetosProgramados = []
 	var planificacionActual = 0
 

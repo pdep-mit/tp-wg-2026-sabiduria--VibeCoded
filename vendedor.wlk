@@ -92,8 +92,6 @@ object vendedor {
 }
 
 object etapaFarmeo{
-    const property tiempoDeFarmeo = 62
-    //var partidaActual = 0
     method puestos() = [
         new Puesto(mejora = masInv, position = game.at(6, 11)),
         new Puesto(mejora = masBasura, position = game.at(8, 11)),

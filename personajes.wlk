@@ -13,7 +13,6 @@ object jugador {
 	var property capacidadInventario = 4 // inicialmente solo puede llevar 4 bolsas de basura
 	var property dinero = 0
 	var property vidas = 3
-	var property danio = 0 // Al comprar la mejora pasa a ser 1
 	const caminarAnimacion = ["pjcamina.png", "pjcamina1.png"]
 	var estaEnMovimiento = false
 	var property estaVivo = true
